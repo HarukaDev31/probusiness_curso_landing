@@ -1,10 +1,22 @@
-<header class="success-head">
-  <p class="success-kicker">CASOS DE ÉXITOS</p>
-  <h2 class="success-title">Alumnos que ya<br />están <span>importando</span></h2>
+---
+const assets = {
+  blobLarge: "/figma/figma-4079-160/blob-large.svg",
+  blobSmall: "/figma/figma-4079-160/blob-small.svg",
+} as const;
+---
+
+<header class="success-head" aria-label="Casos de éxitos">
+  <p class="success-kicker">Casos de éxitos</p>
+
+  <h2 class="success-title">
+    <span class="success-title-line">Alumnos que ya están </span>
+    <span class="success-title-gradient">importando</span>
+  </h2>
+
   <p class="success-desc">
     Resultados reales de personas que pasaron por el curso y aplicaron lo aprendido.
   </p>
-  <img src="/figma/success/glow.png" alt="" class="success-glow" aria-hidden="true" />
+
 </header>
 
 <style>
@@ -18,9 +30,9 @@
     margin: 0 0 10px;
     color: #32dd80;
     font-family: 'Sora', Inter, Arial, sans-serif;
-    font-size: 12px;
-    line-height: 1.2;
-    letter-spacing: 0.02em;
+    font-size: 20px;
+    line-height: 1.26;
+    letter-spacing: 0;
     text-transform: uppercase;
   }
 
@@ -28,40 +40,67 @@
     margin: 0;
     color: #111;
     font-family: 'Epilogue', Inter, Arial, sans-serif;
-    font-size: clamp(44px, 5.5vw, 64px);
+    font-size: 64px;
     font-weight: 300;
     line-height: 0.9;
-    letter-spacing: -0.03em;
+    letter-spacing: -3.84px;
   }
 
-  .success-title span {
-    color: #16d279;
+  .success-title-line {
+    font-weight: 300!important;
+  }
+
+  .success-title-gradient {
     font-weight: 400;
+    color: transparent;
+    background: linear-gradient(90deg, #111 56.15%, #00da80 63.411%);
+    -webkit-background-clip: text;
+    background-clip: text;
   }
 
   .success-desc {
     margin: 18px 0 0;
     max-width: 430px;
     color: #1a1a1a;
+    font-family: 'Epilogue', Inter, Arial, sans-serif;
     font-size: 20px;
-    line-height: 1.2;
+    line-height: 1.26;
   }
 
   .success-glow {
     position: absolute;
-    right: -290px;
-    top: 14px;
-    width: 260px;
-    height: auto;
+    inset: 0;
     pointer-events: none;
     z-index: -1;
-    opacity: 0.85;
+  }
+
+  .success-glow-blob {
+    position: absolute;
+    display: block;
+    max-width: none;
+    opacity: 0.9;
+  }
+
+  .success-glow-blob--large {
+    right: -300px;
+    top: -10px;
+    width: 920px;
+    height: auto;
+  }
+
+  .success-glow-blob--small {
+    right: -10px;
+    top: 240px;
+    width: 560px;
+    height: auto;
   }
 
   @media (max-width: 980px) {
-    .success-kicker { font-size: 14px; margin-bottom: 8px; }
-    .success-title { font-size: clamp(36px, 10.3vw, 48px); }
+    .success-kicker { font-size: 20px; margin-bottom: 8px; }
+    .success-title { font-size: 46px; letter-spacing: -2.6px; }
     .success-desc { font-size: 16px; line-height: 1.25; margin-top: 10px; max-width: 280px; }
-    .success-glow { right: -90px; top: 24px; width: 190px; opacity: 0.7; }
+
+    .success-glow-blob--large { right: -240px; top: 0; width: 760px; opacity: 0.75; }
+    .success-glow-blob--small { right: -60px; top: 210px; width: 420px; opacity: 0.75; }
   }
 </style>

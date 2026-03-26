@@ -1,30 +1,165 @@
 ---
 const items = [
-  { title: 'Oficina en China y Peru', icon: '/figma/support-grid/building.png' },
-  { title: 'Lista de contactos', icon: '/figma/support-grid/contacts.png' },
-  { title: 'Lista de proveedores', icon: '/figma/support-grid/providers.png' },
-  { title: 'Ayuda importadora 1 año', icon: '/figma/support-grid/help.png' },
-  { title: 'Aula virtual por 1 año', icon: '/figma/support-grid/virtual.png' },
-  { title: 'Plantillas de trabajo', icon: '/figma/support-grid/briefcase.png' },
-  { title: 'Conexión a carga consolidada', icon: '/figma/support-grid/consolidated.png' },
-  { title: '10 años de experiencia', icon: '/figma/support-grid/ten.png' },
+  {
+    title: "Oficina en China y Peru",
+    icon: "/figma/support-grid/building.png",
+  },
+  { title: "Lista de contactos", icon: "/figma/support-grid/contacts.png" },
+  { title: "Lista de proveedores", icon: "/figma/support-grid/providers.png" },
+  { title: "Ayuda importadora 1 año", icon: "/figma/support-grid/help.png" },
+  { title: "Aula virtual por 1 año", icon: "/figma/support-grid/virtual.png" },
+  { title: "Plantillas de trabajo", icon: "/figma/support-grid/briefcase.png" },
+  {
+    title: "Conexión a carga consolidada",
+    icon: "/figma/support-grid/consolidated.png",
+  },
+  { title: "10 años de experiencia", icon: "/figma/support-grid/ten.png" },
 ];
+
+const assets = {
+  cardPattern: "/figma/figma-4079-160/card-pattern.png",
+} as const;
 ---
+
 <section class="support-grid-section">
+  <div class="support-grid-heading">
+    <p class="support-grid-kicker">VENTAJAS COMPETITIVAS</p>
+    <h2 class="support-grid-title">
+      <span class="support-grid-title-line">¿Por qué estudiar con</span>
+      <span class="support-grid-title-accent">Pro Business?</span>
+    </h2>
+  </div>
   <div class="support-grid-wrap">
-    {items.map((item) => (
-      <article class="support-card">
-        <img src={item.icon} alt="" aria-hidden="true" />
-        <p>{item.title}</p>
-      </article>
-    ))}
+    {
+      items.map((item) => (
+        <article class="support-card">
+          <div class="support-card-icon" aria-hidden="true">
+            <img src={item.icon} alt="" />
+          </div>
+          <p class="support-card-title">{item.title}</p>
+          <img
+            class="support-card-pattern"
+            src={assets.cardPattern}
+            alt=""
+            aria-hidden="true"
+          />
+        </article>
+      ))
+    }
   </div>
 </section>
 <style>
-  .support-grid-section { background: #fff; padding: 10px 0 44px; }
-  .support-grid-wrap { width: min(100%, 1068px); margin: 0 auto; padding: 0 16px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-  .support-card { min-height: 160px; border-radius: 14px; background: #f6fff4; border: 1px solid rgba(0,0,0,.1); padding: 12px; display: flex; flex-direction: column; }
-  .support-card img { width: 44px; height: 44px; object-fit: contain; margin-bottom: auto; }
-  .support-card p { margin: 8px 0 0; color: #00a24a; font-family: 'Sora', sans-serif; font-size: 16px; line-height: 1.1; font-weight: 600; }
-  @media (max-width: 980px) { .support-grid-wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .support-grid-section {
+    background: #fff;
+    padding: 56px 0 44px;
+  }
+
+  .support-grid-heading {
+    width: 80%;
+    margin: 0 auto 34px;
+    padding: 0 16px;
+  }
+
+  .support-grid-kicker {
+    margin: 0 0 10px;
+    font-family: "Sora", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #32dd80;
+  }
+
+  .support-grid-title {
+    margin: 0;
+    font-family: "Epilogue", sans-serif;
+    font-weight: 300;
+    font-size: 64px;
+    line-height: 1.14;
+    letter-spacing: -3.84px;
+    color: #111;
+  }
+
+  .support-grid-title-line {
+    display: block;
+  }
+
+  .support-grid-title-accent {
+    display: block;
+    font-weight: 500;
+    color: #32dd80;
+  }
+  .support-grid-wrap {
+    width: min(100%, 1068px);
+    margin: 0 auto;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .support-card {
+    min-height: 140px;
+    border-radius: 14px;
+    background: #f6fff4;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 14px 14px 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .support-card-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: rgba(50, 221, 128, 0.35);
+    display: grid;
+    place-items: center;
+  }
+
+  .support-card-icon img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .support-card-title {
+    margin: 18px 0 0;
+    color: #00a24a;
+    font-family: "Sora", sans-serif;
+    font-size: 20px;
+    line-height: 1.1;
+    font-weight: 600;
+    max-width: 12ch;
+  }
+
+  .support-card-pattern {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 110px;
+    height: auto;
+    opacity: 0.35;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @media (max-width: 980px) {
+    .support-grid-heading {
+      margin-bottom: 22px;
+    }
+    .support-grid-kicker {
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .support-grid-title {
+      font-size: clamp(36px, 10.3vw, 48px);
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+    }
+  }
 </style>

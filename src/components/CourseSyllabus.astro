@@ -1,42 +1,464 @@
 ---
-const syllabus = [
-  ['Módulo 1', 'Introducción y oportunidad en importaciones'],
-  ['Módulo 2', 'Búsqueda de proveedores y validación'],
-  ['Módulo 3', 'Negociación y costos'],
-  ['Módulo 4', 'Pagos internacionales y riesgos'],
-  ['Módulo 5', 'Logística y embarques'],
-  ['Módulo 6', 'Aduanas y documentación'],
-  ['Módulo 7', 'Venta en Perú y márgenes'],
-  ['Módulo 8', 'Escalamiento del negocio'],
-];
+const header = {
+  kicker: { top: "0%", right: "86.09%", bottom: "98.54%", left: "0%" },
+  hero: { top: "2.74%", right: "67.91%", bottom: "90.1%", left: "0%" },
+  subtitle: { top: "10.54%", right: "64.01%", bottom: "83.98%", left: "0%" },
+} as const;
+
+const cards = [
+  {
+    id: 1,
+    card: { top: "7.46%", right: "9.78%", bottom: "74.68%", left: "56.02%" },
+    number: { top: "8.01%", right: "0%", bottom: "75.3%", left: "75.31%" },
+    title: { top: "12.54%", right: "25.9%", bottom: "81.77%", left: "59.75%" },
+    desc: { top: "18.76%", right: "15.29%", bottom: "77.4%", left: "59.72%" },
+    titleText: "Cómo buscar productos novedosos",
+    descText:
+      "Métodos y herramientas para detectar productos con alta demanda antes de que se saturen.",
+  },
+  {
+    id: 2,
+    card: { top: "18.87%", right: "60.16%", bottom: "63.27%", left: "5.64%" },
+    number: {
+      top: "19.43%",
+      right: "51.59%",
+      bottom: "63.88%",
+      left: "23.72%",
+    },
+    title: { top: "23.95%", right: "76.28%", bottom: "70.35%", left: "9.37%" },
+    desc: { top: "30.15%", right: "69.29%", bottom: "66%", left: "9.37%" },
+    titleText: "Encontrar proveedores confiables",
+    descText:
+      "Cómo verificar proveedores en distintas plataformas chinas sin arriesgar tu dinero.",
+  },
+  {
+    id: 3,
+    card: { top: "29.19%", right: "18.34%", bottom: "52.95%", left: "47.46%" },
+    number: { top: "29.74%", right: "9.77%", bottom: "53.57%", left: "65.54%" },
+    titleTwoLines: {
+      top: "34.26%",
+      right: "31.76%",
+      bottom: "60.04%",
+      left: "51.19%",
+    },
+    desc: { top: "40.46%", right: "29.15%", bottom: "55.69%", left: "51.19%" },
+    titleLines: ["Negociación", "con proveedores chinos"],
+    descText:
+      "Técnicas para negociar precios, condiciones y muestras con fabricantes en China.",
+  },
+  {
+    id: 4,
+    card: { top: "39.91%", right: "65.8%", bottom: "42.24%", left: "0%" },
+    number: {
+      top: "40.46%",
+      right: "57.23%",
+      bottom: "42.85%",
+      left: "18.08%",
+    },
+    title: { top: "44.83%", right: "81.95%", bottom: "49.47%", left: "3.7%" },
+    desc: { top: "51.18%", right: "74.94%", bottom: "44.97%", left: "3.73%" },
+    titleText: "Calcular costos de importación",
+    descText:
+      "Aprende a calcular el costo real incluyendo flete, aduana e impuestos.",
+  },
+  {
+    id: 5,
+    card: { top: "51.5%", right: "10.37%", bottom: "30.64%", left: "55.44%" },
+    number: { top: "52.06%", right: "1.88%", bottom: "31.26%", left: "73.43%" },
+    title: { top: "56.58%", right: "26.49%", bottom: "37.73%", left: "59.16%" },
+    desc: { top: "61.52%", right: "15.29%", bottom: "34.64%", left: "59.13%" },
+    titleText: "Logística internacional",
+    descText:
+      "Entiende cómo funciona el transporte aereo y marítimo, tiempos de tránsito y coordinación de carga.",
+  },
+  {
+    id: 6,
+    card: { top: "60.94%", right: "60.16%", bottom: "21.21%", left: "5.64%" },
+    number: {
+      top: "61.49%",
+      right: "52.55%",
+      bottom: "21.82%",
+      left: "22.76%",
+    },
+    title: { top: "65.77%", right: "76.31%", bottom: "28.54%", left: "9.34%" },
+    desc: { top: "70.88%", right: "69.33%", bottom: "25.27%", left: "9.34%" },
+    titleText: "Trámites aduaneros",
+    descText:
+      "El proceso aduanero paso a paso para que tu mercancía llegue sin problemas.",
+  },
+  {
+    id: 7,
+    card: { top: "73.75%", right: "18.34%", bottom: "8.39%", left: "47.46%" },
+    number: { top: "74.31%", right: "9.85%", bottom: "9%", left: "65.45%" },
+    title: { top: "78.3%", right: "34.46%", bottom: "16.01%", left: "51.19%" },
+    desc: { top: "84.53%", right: "29.97%", bottom: "11.63%", left: "51.16%" },
+    titleText: "Como abrir una empresa en China",
+    descText: "Requisitos, tiempos y apertura de negocio en China.",
+  },
+  {
+    id: 8,
+    card: { top: "82.14%", right: "61.62%", bottom: "0%", left: "4.18%" },
+    number: { top: "82.7%", right: "54.01%", bottom: "0.61%", left: "21.3%" },
+    title: { top: "86.16%", right: "77.77%", bottom: "8.15%", left: "7.88%" },
+    descTwoLines: {
+      top: "92.09%",
+      right: "70.78%",
+      bottom: "4.06%",
+      left: "7.88%",
+    },
+    titleText: "Gestión de empresa importadora",
+    descLines: [
+      "Cómo estructurar,",
+      "administrar y escalar tu negocio de importación.",
+    ],
+  },
+] as const;
 ---
 
 <section class="syllabus">
   <div class="syllabus-wrap">
-    <p class="kicker">TEMARIO</p>
-    <h2>Curso <span>Syllabus</span></h2>
-    <div class="grid">
-      {syllabus.map(([title, desc], i) => (
-        <article class="card">
-          <strong>{String(i + 1).padStart(2, '0')}</strong>
-          <h3>{title}</h3>
-          <p>{desc}</p>
-        </article>
-      ))}
+    <div class="syllabus-figma" aria-label="Temario del curso">
+      <p class="syllabus-kicker" style={header.kicker}>temario</p>
+
+      <p class="syllabus-hero" style={header.hero}>
+        <span class="syllabus-hero-line">Lo que vas a </span>
+        <span class="syllabus-hero-gradient">aprender</span>
+      </p>
+
+      <p class="syllabus-subtitle" style={header.subtitle}>
+        <span class="syllabus-subtitle-strong">
+          Un programa completo para que domines{" "}
+        </span>
+        <span class="syllabus-subtitle-regular">
+          cada etapa del negocio de importación desde cero.
+        </span>
+      </p>
+
+      {
+        cards.map((c) => (
+          <>
+            <div
+              class={`syllabus-card-bg syllabus-card-bg--${c.id}`}
+              style={c.card}
+            />
+
+            <p
+              class={`syllabus-card-number syllabus-card-number--${c.id}`}
+              style={c.number}
+            >
+              {c.id}
+            </p>
+
+            {"titleTwoLines" in c ? (
+              <div
+                class="syllabus-card-title-two-lines"
+                style={c.titleTwoLines}
+              >
+                {c.titleLines.map((line) => (
+                  <p class="syllabus-card-title-line">{line}</p>
+                ))}
+              </div>
+            ) : (
+              <p class="syllabus-card-title" style={c.title}>
+                {c.titleText}
+              </p>
+            )}
+
+            {"descTwoLines" in c ? (
+              <div class="syllabus-card-desc-two-lines" style={c.descTwoLines}>
+                {c.descLines.map((line) => (
+                  <p class="syllabus-card-desc-line">{line}</p>
+                ))}
+              </div>
+            ) : (
+              <p class="syllabus-card-desc" style={c.desc}>
+                {c.descText}
+              </p>
+            )}
+          </>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <style>
-  .syllabus { background: #000; color: #fff; padding: 54px 0 70px; }
-  .syllabus-wrap { width: min(100%, 1180px); margin: 0 auto; padding: 0 16px; }
-  .kicker { margin: 0; font-size: 14px; color: #32dd80; letter-spacing: .08em; }
-  h2 { margin: 8px 0 24px; font-weight: 300; font-size: clamp(42px, 5vw, 72px); line-height: .95; }
-  h2 span { color: #32dd80; }
-  .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
-  .card { border: 1px solid #1f1f1f; border-radius: 18px; padding: 18px; background: #101010; }
-  .card strong { color: #32dd80; font-size: 22px; }
-  .card h3 { margin: 8px 0 4px; font-size: 22px; }
-  .card p { margin: 0; color: #cfcfcf; font-size: 15px; }
-  @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
+  .syllabus {
+    --syllabus-font-scale: 1.2;
+    background: #000;
+    color: #fff;
+    padding: 54px 0 70px;
+  }
+
+  .syllabus-wrap {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .syllabus-figma {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    aspect-ratio: 1028.199 / 1716.576;
+  }
+
+  .syllabus-kicker {
+    position: absolute;
+    margin: 0;
+    font-family: "Sora", sans-serif;
+    font-weight: 400;
+    font-size: calc(20px * var(--syllabus-font-scale));
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: #32dd80;
+    line-height: 1.26;
+    z-index: 3;
+  }
+
+  .syllabus-hero {
+    position: absolute;
+    margin: 0;
+    font-family: "Epilogue", sans-serif;
+    font-weight: 300;
+    font-size: calc(64px * var(--syllabus-font-scale));
+    letter-spacing: calc(-3.84px * var(--syllabus-font-scale));
+    color: #fff;
+    z-index: 2;
+    line-height: 0;
+    display: block;
+  }
+
+  .syllabus-hero-line {
+    line-height: 0.85;
+  }
+
+  .syllabus-hero-gradient {
+    line-height: 0.85;
+    color: transparent;
+    background: linear-gradient(180deg, #25cf43 0%, #61fd7d 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .syllabus-subtitle {
+    position: absolute;
+    margin: 0;
+    font-family: "Epilogue", sans-serif;
+    font-weight: 300;
+    font-size: calc(20px * var(--syllabus-font-scale));
+    color: #fff;
+    z-index: 2;
+    line-height: 0;
+    display: block;
+  }
+
+  .syllabus-subtitle-strong,
+  .syllabus-subtitle-regular {
+    display: inline;
+    line-height: 1.26;
+  }
+
+  .syllabus-subtitle-strong {
+    font-weight: 300;
+  }
+
+  .syllabus-subtitle-regular {
+    font-weight: 400;
+  }
+
+  .syllabus-card-bg {
+    position: absolute;
+    background: #000;
+    border-radius: 18px;
+    z-index: 0;
+  }
+
+  /* Hooks por tarjeta (BG) */
+  .syllabus-card-bg--1 {
+    background: radial-gradient(
+      220% 100% at 0% 0%,
+      #32dd80 0%,
+      rgba(0, 86, 39, 0) 100%
+    );
+  }
+  .syllabus-card-bg--2 {
+    background: radial-gradient(
+      100.45% 100.45% at 100% 100%,
+      #32dd80 0%,
+      rgba(0, 86, 39, 0) 120%
+    );
+  }
+  .syllabus-card-bg--3 {
+    background: radial-gradient(
+      100.45% 100.45% at 100% 100%,
+      #32dd80 0%,
+      rgba(0, 86, 39, 0) 120%
+    );
+  }
+  .syllabus-card-bg--4 {
+    background: radial-gradient(
+      170% 100% at 100% 10%,
+      #32dd80 0%,
+      rgba(0, 86, 39, 0) 100%
+    );
+  }
+  .syllabus-card-bg--5 {
+    background: radial-gradient(
+      100.45% 100.45% at 0% 100%,
+      #32dd80 0%,
+      rgba(0, 86, 39, 0) 120%
+    );
+  }
+  .syllabus-card-bg--6 {
+    background: radial-gradient(
+      220% 100% at 0% 0%,
+      #32dd80 0%,
+      rgba(0, 86, 39, 0) 100%
+    );
+  }
+  .syllabus-card-bg--7 {
+    background: radial-gradient(
+      100.45% 100.45% at 100% 100%,
+      #32dd80 0%,
+      rgba(0, 86, 39, 0) 120%
+    );
+  }
+  .syllabus-card-bg--8 {
+    background: radial-gradient(
+      90% 100.45% at 100% 0%,
+      #32dd80 0%,
+      rgba(0, 86, 39, 0) 120%
+    );
+  }
+
+  .syllabus-card-number {
+    position: absolute;
+    margin: 0;
+    font-family: "Epilogue", sans-serif;
+    font-weight: 600;
+    font-size: calc(250px * var(--syllabus-font-scale));
+    line-height: 1.26;
+    color: rgba(50, 221, 128, 0.16);
+    overflow: hidden;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Hooks por tarjeta (Número) */
+  .syllabus-card-number--1 {
+    background: linear-gradient(213deg, #00da80 54.52%, #111 76.83%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .syllabus-card-number--2 {
+    background: linear-gradient(
+      195deg,
+      #000 43.35%,
+      rgba(50, 221, 128, 0) 109.11%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .syllabus-card-number--3 {
+    background: linear-gradient(
+      303deg,
+      #00da80 59.68%,
+      rgba(17, 17, 17, 0) 105.45%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .syllabus-card-number--4 {
+    background: linear-gradient(
+      195deg,
+      #000 43.35%,
+      rgba(50, 221, 128, 0) 108.15%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .syllabus-card-number--5 {
+    background: linear-gradient(
+      94deg,
+      #00da80 6.51%,
+      rgba(17, 17, 17, 0.63) 56.59%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .syllabus-card-number--6 {
+    background: linear-gradient(190deg, #000 47.79%, #32dd80 106.91%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .syllabus-card-number--7 {
+    background: linear-gradient(
+      30deg,
+      #00da80 37.02%,
+      rgba(17, 17, 17, 0) 78.63%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .syllabus-card-number--8 {
+    background: linear-gradient(82deg, #000 14.45%, #32dd80 86.55%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .syllabus-card-title {
+    position: absolute;
+    margin: 0;
+    font-family: "Sora", sans-serif;
+    font-weight: 600;
+    font-size: calc(20px * var(--syllabus-font-scale));
+    line-height: 1.26;
+    color: #fff;
+    z-index: 2;
+    white-space: pre-wrap;
+  }
+
+  .syllabus-card-desc,
+  .syllabus-card-title-two-lines,
+  .syllabus-card-desc-two-lines {
+    position: absolute;
+    margin: 0;
+    font-family: "Epilogue", sans-serif;
+    font-weight: 400;
+    font-size: calc(14px * var(--syllabus-font-scale));
+    line-height: 1.25;
+    color: #fff;
+    z-index: 2;
+    white-space: pre-wrap;
+  }
+
+  .syllabus-card-title-two-lines {
+    font-family: "Sora", sans-serif;
+    font-weight: 600;
+    line-height: 1.26;
+    font-size: calc(20px * var(--syllabus-font-scale));
+  }
+
+  .syllabus-card-title-line,
+  .syllabus-card-desc-line {
+    margin: 0;
+    line-height: 1.26;
+  }
+
+  .syllabus-card-desc-two-lines {
+    line-height: 1.25;
+  }
+
+  .syllabus-card-desc-line {
+    line-height: 1.25;
+  }
 </style>

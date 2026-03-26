@@ -1,0 +1,27 @@
+# Assets Figma node 4083:693 (grid + iconos)
+# Formato: <url> <ruta/relativa/de/salida> (relativa a public/)
+
+# Iconos (se descargan tal como los entrega Figma: normalmente SVG)
+https://www.figma.com/api/mcp/asset/d7814154-b8a6-4876-8efd-5a0caa244244 figma/figma-4083-693/icon-building-a.svg
+https://www.figma.com/api/mcp/asset/4b0310ac-f979-4e40-bc22-132a150f6216 figma/figma-4083-693/icon-building-b.svg
+https://www.figma.com/api/mcp/asset/95dac56b-420b-433b-bb02-d2585362f71e figma/figma-4083-693/icon-building-c.svg
+
+https://www.figma.com/api/mcp/asset/c38ac347-be72-45bd-b2dd-2a02e96289e3 figma/figma-4083-693/icon-help-a.svg
+https://www.figma.com/api/mcp/asset/cf27d9b3-3dcd-427c-9fc8-1294a3ed9e3d figma/figma-4083-693/icon-help-b.svg
+
+https://www.figma.com/api/mcp/asset/72a5ccac-1840-4b37-882c-790822f1064d figma/figma-4083-693/icon-contacts.svg
+
+https://www.figma.com/api/mcp/asset/58d83955-1ff3-44d8-ad92-085514e7f5bb figma/figma-4083-693/icon-providers-a.svg
+https://www.figma.com/api/mcp/asset/02cd1ce8-798c-42e0-8aa5-1a6f16694fc7 figma/figma-4083-693/icon-providers-b.svg
+https://www.figma.com/api/mcp/asset/91057d57-c79a-4b7b-ba02-598c8a5406e0 figma/figma-4083-693/icon-providers-c.svg
+
+https://www.figma.com/api/mcp/asset/eccddc1e-2d3b-43ed-95c1-67430787f207 figma/figma-4083-693/icon-consolidated-a.svg
+https://www.figma.com/api/mcp/asset/943a50ce-f839-46ba-ab10-44d438e14ee2 figma/figma-4083-693/icon-consolidated-b.svg
+https://www.figma.com/api/mcp/asset/a2e6bd7e-0c02-4eb9-9221-f2c8f3068276 figma/figma-4083-693/icon-consolidated-c.svg
+https://www.figma.com/api/mcp/asset/96813e22-8bf4-484e-9198-1988e9604137 figma/figma-4083-693/icon-consolidated-d.svg
+https://www.figma.com/api/mcp/asset/a85233a2-ea1d-4559-a386-306b5ce0c73a figma/figma-4083-693/icon-consolidated-e.svg
+https://www.figma.com/api/mcp/asset/1121b385-9881-4c6c-8ca3-9b1d06d74b77 figma/figma-4083-693/icon-consolidated-f.svg
+https://www.figma.com/api/mcp/asset/073a51b2-da5d-4687-9188-62854762cdbd figma/figma-4083-693/icon-consolidated-g.svg
+
+https://www.figma.com/api/mcp/asset/87ead6c5-9de0-4ff9-8237-76c521a43ef3 figma/figma-4083-693/icon-ten.svg
+

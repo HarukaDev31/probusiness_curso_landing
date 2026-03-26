@@ -1,4 +1,5 @@
 ---
+// @ts-nocheck
 const instructors = [
   {
     role: 'Ceo',
@@ -46,6 +47,13 @@ const instructors = [
     ],
   },
 ];
+
+/** @param {string} text */
+function breakAfterSecondWord(text) {
+  const words = String(text ?? '').trim().split(/\s+/).filter(Boolean);
+  if (words.length <= 1) return { before: words.join(' '), after: '' };
+  return { before: words.slice(0, 1).join(' '), after: words.slice(1).join(' ') };
+}
 ---
 
 <section class="instructors">
@@ -58,7 +66,19 @@ const instructors = [
         <article class:list={['instructor-card', item.reversed && 'is-reversed']}>
           <div class="instructor-text">
             <h3>
-              <span>{item.role}</span> {item.roleSuffix}
+              <span>{item.role}</span> 
+              {(() => {
+                const { before, after } = breakAfterSecondWord(item.roleSuffix);
+                return after ? (
+                  <>
+                    {before}
+                    <br />
+                    {after}
+                  </>
+                ) : (
+                  before
+                );
+              })()}
             </h3>
             <ul>
               {item.points.map((point) => (
@@ -87,6 +107,7 @@ const instructors = [
     width: min(100%, 1180px);
     margin: 0 auto;
     padding: 0 16px;
+    line-height: 2;
   }
 
   .instructors-kicker {
@@ -94,12 +115,13 @@ const instructors = [
     font-family: 'Sora', Inter, Arial, sans-serif;
     font-size: 20px;
     text-transform: uppercase;
+    font-weight: 300;
   }
 
   .instructors h2 {
     margin: 0;
     font-size: clamp(56px, 5.2vw, 88px);
-    line-height: 0.9;
+    line-height: 1.2;
     letter-spacing: -0.04em;
     font-weight: 300;
   }
@@ -144,19 +166,23 @@ const instructors = [
     line-height: 0.92;
     font-family: 'Sora', Inter, Arial, sans-serif;
     font-weight: 600;
+    
   }
 
   .instructor-text h3 span {
-    color: #00a24a;
+    background: linear-gradient(98deg, #111 -8.05%, #00DA80 34.99%);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
   }
 
   .instructor-text ul {
     margin: 24px 0 0;
-    padding: 0;
+    padding-left: 5em;
     list-style: none;
     font-family: 'Sora', Inter, Arial, sans-serif;
     font-size: 20px;
-    line-height: 1.12;
+    line-height: 1.2;
   }
 
   .instructor-text li {
@@ -164,6 +190,7 @@ const instructors = [
     gap: 10px;
     align-items: flex-start;
     margin-bottom: 2px;
+    width: 80%;
   }
 
   .instructor-text li::before {
@@ -248,6 +275,7 @@ const instructors = [
 
     .instructor-text h3 {
       font-size: clamp(32px, 8.8vw, 44px);
+      
     }
 
     .instructor-text ul {

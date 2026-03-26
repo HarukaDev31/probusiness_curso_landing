@@ -1,24 +1,121 @@
 <article class="price-panel">
-  <div class="price-arrow"><img src="/figma/pricing/arrow.png" alt="" aria-hidden="true" /></div>
-  <p class="price-kicker">INSCRÍBETE AHORA</p>
-  <h3>Empieza tu<br />negocio de<br />importación hoy</h3>
-  <p class="price-copy">Completa el formulario y nos contactaremos contigo para confirmar tu inscripción y coordinar el pago.</p>
-  <p class="chip">Precio con dscto</p>
-  <p class="price-now">S/380</p>
-  <p class="price-now-label">PRECIO FINAL</p>
-  <p class="price-before">S/500</p>
-  <p class="price-before-label">ANTES</p>
+  <div class="price-panel-content">
+    <div class="price-arrow">
+      <svg
+        width="43"
+        height="46"
+        viewBox="0 0 43 46"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M33.8453 6.22993C33.8446 6.22998 33.8439 6.22992 33.8432 6.23003L21.8085 7.16134C20.9069 7.23112 20.2325 8.01849 20.3022 8.92024C20.372 9.82188 21.1594 10.4962 22.061 10.4265L30.141 9.80115L7.52194 36.0858C6.93206 36.7712 7.00955 37.8051 7.69502 38.3949C8.3805 38.9848 9.41432 38.9073 10.0042 38.2219L32.6232 11.9373L33.2094 20.0201C33.2749 20.9221 34.0591 21.6002 34.9611 21.5347C35.8632 21.4693 36.5412 20.6849 36.4758 19.7831L35.6027 7.74404C35.6026 7.74334 35.6024 7.74266 35.6024 7.7419C35.5356 6.83831 34.7459 6.16144 33.8453 6.22993Z"
+          fill="#32DD80"></path>
+      </svg>
+    </div>
+    <p class="price-kicker">INSCRÍBETE AHORA</p>
+    <h3>Empieza tu<br />negocio de<br />importación hoy</h3>
+    <p class="price-copy">
+      Completa el formulario y nos contactaremos contigo para confirmar tu
+      inscripción y coordinar el pago.
+    </p>
+  </div>
+  <div class="price-panel-content-2">
+    <p class="chip">Precio con dscto</p>
+    <p class="price-now">S/380</p>
+    ----------------------------------------
+    <p class="price-now-label">PRECIO FINAL</p>
+    <p class="price-before">S/500</p>
+    <p class="price-before-label">ANTES</p>
+  </div>
 </article>
 <style>
-  .price-panel { position: relative; border-radius: 20px; border: 2px solid rgba(255,255,255,.5); padding: 24px 18px 18px; background: radial-gradient(140% 100% at 50% 30%, #48e792 0%, #0a0a0a 74%); }
-  .price-arrow { position: absolute; right: 14px; top: 14px; width: 42px; height: 42px; border-radius: 50%; background: #000; display: grid; place-items: center; }
-  .price-arrow img { width: 16px; height: 16px; }
-  .price-kicker { margin: 0; font-size: 14px; font-family: 'Sora', sans-serif; }
-  .price-panel h3 { margin: 10px 0 0; font-size: clamp(42px, 10vw, 58px); line-height: .9; font-weight: 300; }
-  .price-copy { margin: 14px 0 0; font-size: 16px; max-width: 280px; }
-  .chip { margin: 18px 0 0; display: inline-block; padding: 6px 12px; border-radius: 10px; background: #0e1a13; box-shadow: 0 0 15px 3px rgba(50,221,128,.43), inset 0 0 10px -1px #32dd80; font-size: 14px; }
-  .price-now { margin: 12px 0 0; font-size: clamp(78px, 20vw, 110px); line-height: .9; font-weight: 600; }
-  .price-now-label { margin: 4px 0 0; text-align: right; font-size: 14px; }
-  .price-before { margin: 14px 0 0; text-align: right; font-size: clamp(56px, 14vw, 76px); line-height: .9; text-decoration: line-through; text-decoration-color: #32dd80; text-decoration-thickness: 3px; opacity: .85; }
-  .price-before-label { margin: 6px 0 0; text-align: right; font-size: 12px; }
+  .price-panel {
+    position: relative;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    padding: 4em;
+    gap: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: radial-gradient(140% 100% at 50% 30%, #48e792 0%, #0a0a0a 74%);
+    height: 80vh;
+    margin: 0 auto;
+  }
+  .price-arrow {
+    position: absolute;
+    right: 2em;
+    top: 2em;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #000;
+    display: grid;
+    place-items: center;
+  }
+
+  .price-kicker {
+    margin: 0;
+    font-size: 20px;
+    font-family: "Sora", sans-serif;
+  }
+  .price-panel h3 {
+    margin: 10px 0 0;
+    font-size: clamp(42px, 10vw, 48px);
+    line-height: 0.9;
+    font-weight: 300;
+    font-family: "Epilogue", sans-serif;
+  }
+  .price-copy {
+    margin: 14px 0 0;
+    font-size: 16px;
+    max-width: 280px;
+  }
+  .price-panel-content-2{
+    width: 80%;
+    margin: 0 auto;
+  }
+  .chip {
+    margin: 18px 0 0;
+    display: inline-block;
+    padding: 0.5em 1em;
+    border-radius: 1em;
+    background: #0e1a13;
+    box-shadow:
+      0 0 15px 3px rgba(50, 221, 128, 0.43),
+      inset 0 0 10px -1px #32dd80;
+    font-size: 20px;
+  }
+  .price-now {
+    margin: 12px 0 0;
+    font-size: clamp(78px, 20vw, 110px);
+    line-height: 0.9;
+    font-weight: 600;
+    /**sora font */
+    font-family: "Sora", sans-serif;
+  }
+  .price-now-label {
+    margin: 4px 0 0;
+    text-align: right;
+    font-size: 14px;
+  }
+  .price-before {
+    margin: 14px 0 0;
+    text-align: right;
+    font-size: clamp(56px, 14vw, 76px);
+    line-height: 0.9;
+    text-decoration: line-through;
+    text-decoration-color: #32dd80;
+    text-decoration-thickness: 3px;
+    opacity: 0.85;
+    /**sora font */
+    font-family: "Sora", sans-serif;
+    font-weight: 300;
+  }
+  .price-before-label {
+    margin: 6px 0 0;
+    text-align: right;
+    font-size: 12px;
+  }
 </style>

@@ -1,0 +1,100 @@
+<section class="course-overview">
+  <div class="course-overview-header">
+    <p class="course-kicker">CONOCE EL CURSO</p>
+    <h2 class="course-title">¿De qué trata <span>el curso?</span></h2>
+  </div>
+  <article class="course-video-card">
+    <button
+      type="button"
+      class="course-play"
+      aria-label="Reproducir video del curso"
+    >
+      <span class="course-play-circle"
+        ><img src="/figma/play.png" alt="" /></span
+      >
+    </button>
+  </article>
+</section>
+
+<style>
+  .course-overview {
+    background: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .course-kicker {
+    text-align: center;
+    font-size: 20px;
+  }
+  .course-title {
+    margin: 0 0 22px;
+    text-align: center;
+    font-size: clamp(46px, 12vw, 64px);
+    line-height: 0.95;
+    font-weight: 300;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+  .course-title span {
+    color: #32dd80;
+  }
+  .course-video-card {
+    width: min(100%, 1180px);
+    margin: 0 auto;
+    border-radius: 18px;
+    background: #0f0f0f;
+    min-height: 220px;
+    height: 70vh;
+    position: relative;
+  }
+  .course-play {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: transparent;
+    display: grid;
+    place-items: center;
+  }
+  .course-play-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0);
+  }
+  .course-play-circle img {
+    width: 34px;
+    height: 34px;
+  }
+
+  @media (max-width: 679px) {
+    .course-overview {
+      padding: 72px 0 96px;
+    }
+    .course-kicker {
+      font-size: 24px;
+    }
+    .course-title {
+      font-size: clamp(64px, 5.2vw, 92px);
+      margin-bottom: 40px;
+    }
+    .course-video-card {
+      border-radius: 24px;
+      min-height: 420px;
+    }
+    .course-play-circle {
+      width: 120px;
+      height: 120px;
+    }
+    .course-play-circle img {
+      width: 48px;
+      height: 48px;
+    }
+  }
+</style>

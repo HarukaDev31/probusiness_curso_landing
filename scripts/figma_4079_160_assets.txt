@@ -1,0 +1,10 @@
+# Assets Figma node 4079:160
+# Formato: <url> <ruta/relativa/de/salida> (relativa a public/)
+
+# Blobs para el header de casos de éxito
+https://www.figma.com/api/mcp/asset/f69c4c87-ef42-4a2b-9e24-2b20b94050b0 figma/figma-4079-160/blob-large.svg
+https://www.figma.com/api/mcp/asset/4c6cf592-b6a2-4445-a11d-f7217fd309ee figma/figma-4079-160/blob-small.svg
+
+# Patrón decorativo para las cards del grid (tile)
+https://www.figma.com/api/mcp/asset/2147740b-67d6-4223-8114-29926d014335 figma/figma-4079-160/card-pattern.svg
+
