@@ -1,0 +1,89 @@
+<section class="wa-doubt">
+  <div class="wa-inner">
+    <h2>¿Tienes alguna <span>duda?</span></h2>
+    <p>Escríbenos por WhatsApp y te respondemos de inmediato.</p>
+    <a href="#" class="wa-btn">
+      <span>Escribir por WhatsApp</span>
+      <img src="/figma/footer/chevron.png" alt="" aria-hidden="true" />
+    </a>
+  </div>
+  <div class="wa-columns" aria-hidden="true"></div>
+  <img src="/figma/footer/truck.png" alt="" aria-hidden="true" class="wa-truck" />
+</section>
+
+<style>
+  .wa-doubt {
+    position: relative;
+    background: linear-gradient(180deg, #fff 0%, #eef2f0 100%);
+    overflow: hidden;
+    border-top: 4px solid #000;
+    padding: 54px 16px 58px;
+  }
+  .wa-inner {
+    width: min(100%, 920px);
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .wa-inner h2 {
+    margin: 0;
+    color: #111;
+    font-size: clamp(42px, 6.2vw, 64px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+  }
+  .wa-inner h2 span { color: #32dd80; font-weight: 500; }
+  .wa-inner p {
+    margin: 18px auto 0;
+    color: #111;
+    font-size: 20px;
+    max-width: 430px;
+    line-height: 1.15;
+  }
+  .wa-btn {
+    margin: 34px auto 0;
+    width: min(100%, 760px);
+    min-height: 88px;
+    border-radius: 17px;
+    background: linear-gradient(90deg, #25cf43 0%, #61fd7d 100%);
+    box-shadow: 0 17px 22.9px -7px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    text-decoration: none;
+    color: #000;
+    font-size: clamp(26px, 3.3vw, 46px);
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+  }
+  .wa-btn img { width: 34px; height: 34px; object-fit: contain; }
+  .wa-columns {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 56%;
+    background:
+      linear-gradient(180deg, rgba(56, 230, 141, 0.52), rgba(56, 230, 141, 0.08)),
+      repeating-linear-gradient(90deg, rgba(56,230,141,.26) 0 64px, rgba(56,230,141,.08) 64px 74px);
+    opacity: 0.9;
+    z-index: 1;
+  }
+  .wa-truck {
+    position: absolute;
+    right: 68px;
+    bottom: 42px;
+    width: 146px;
+    z-index: 2;
+  }
+  @media (max-width: 980px) {
+    .wa-doubt { padding: 34px 14px 36px; }
+    .wa-inner p { margin-top: 10px; font-size: 15px; max-width: 280px; }
+    .wa-btn { min-height: 54px; margin-top: 16px; border-radius: 12px; gap: 10px; font-size: 18px; }
+    .wa-btn img { width: 22px; height: 22px; }
+    .wa-columns { height: 44%; }
+    .wa-truck { width: 88px; right: 14px; bottom: 18px; }
+  }
+</style>

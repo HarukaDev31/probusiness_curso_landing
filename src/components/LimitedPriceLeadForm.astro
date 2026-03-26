@@ -1,0 +1,24 @@
+<article class="form-panel">
+  <img class="hourglass" src="/figma/pricing/hourglass.png" alt="" aria-hidden="true" />
+  <h3>Precio por<br />tiempo<br />limitado</h3>
+  <form class="lead-form">
+    <label>Nombre Completo<input placeholder="e.g José Gutiérrez" /></label>
+    <label>Número de WhatsApp<input placeholder="999 999 999" /></label>
+    <label>Correo electrónico<input placeholder="jgutierrezl@example.com" /></label>
+    <label>¿Tienes experiencia importando?
+      <select><option>Selecciona una opción</option></select>
+    </label>
+    <button type="button">Inscribirme por S/ 380</button>
+  </form>
+  <p class="form-foot">Un asesor te contactará para confirmar tu inscripción</p>
+</article>
+<style>
+  .form-panel { position: relative; }
+  .form-panel h3 { margin: 0 0 16px; font-size: clamp(42px, 11vw, 60px); line-height: .9; font-weight: 300; }
+  .hourglass { position: absolute; width: 130px; right: -12px; top: -22px; transform: rotate(-38deg); pointer-events: none; }
+  .lead-form { display: grid; gap: 10px; max-width: 640px; }
+  .lead-form label { font-size: 14px; display: grid; gap: 6px; }
+  .lead-form input, .lead-form select { height: 52px; border-radius: 10px; border: 1px solid #000; background: #1a1a1a; color: #9c9c9c; font-size: 14px; padding: 0 14px; }
+  .lead-form button { height: 52px; border-radius: 10px; border: 1px solid #000; background: linear-gradient(90deg,#32dd80,#6dffb0); color: #000; font-size: 16px; font-weight: 600; }
+  .form-foot { margin: 12px 0 0; text-align: center; font-size: 14px; }
+</style>

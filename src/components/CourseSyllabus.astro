@@ -1,0 +1,42 @@
+---
+const syllabus = [
+  ['Módulo 1', 'Introducción y oportunidad en importaciones'],
+  ['Módulo 2', 'Búsqueda de proveedores y validación'],
+  ['Módulo 3', 'Negociación y costos'],
+  ['Módulo 4', 'Pagos internacionales y riesgos'],
+  ['Módulo 5', 'Logística y embarques'],
+  ['Módulo 6', 'Aduanas y documentación'],
+  ['Módulo 7', 'Venta en Perú y márgenes'],
+  ['Módulo 8', 'Escalamiento del negocio'],
+];
+---
+
+<section class="syllabus">
+  <div class="syllabus-wrap">
+    <p class="kicker">TEMARIO</p>
+    <h2>Curso <span>Syllabus</span></h2>
+    <div class="grid">
+      {syllabus.map(([title, desc], i) => (
+        <article class="card">
+          <strong>{String(i + 1).padStart(2, '0')}</strong>
+          <h3>{title}</h3>
+          <p>{desc}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .syllabus { background: #000; color: #fff; padding: 54px 0 70px; }
+  .syllabus-wrap { width: min(100%, 1180px); margin: 0 auto; padding: 0 16px; }
+  .kicker { margin: 0; font-size: 14px; color: #32dd80; letter-spacing: .08em; }
+  h2 { margin: 8px 0 24px; font-weight: 300; font-size: clamp(42px, 5vw, 72px); line-height: .95; }
+  h2 span { color: #32dd80; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+  .card { border: 1px solid #1f1f1f; border-radius: 18px; padding: 18px; background: #101010; }
+  .card strong { color: #32dd80; font-size: 22px; }
+  .card h3 { margin: 8px 0 4px; font-size: 22px; }
+  .card p { margin: 0; color: #cfcfcf; font-size: 15px; }
+  @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,271 @@
+---
+const instructors = [
+  {
+    role: 'Ceo',
+    roleSuffix: 'Pro Business',
+    name: 'Miguel Villegas',
+    image: '/figma/instructors/miguel.jpg',
+    points: [
+      'Estratega',
+      'Manejo de empresa en China y Perú',
+      'Gestión de equipo de trabajo',
+      'Automatización',
+      'Implementación de procesos',
+      'Costos',
+      'Análisis de kpis',
+      'Marketing',
+    ],
+  },
+  {
+    role: 'Jefa',
+    roleSuffix: 'de importaciones',
+    name: 'Meliza Vallle',
+    image: '/figma/instructors/meliza.jpg',
+    points: [
+      'Operaciones internacionales marítimas',
+      'Permisos',
+      'Documentación',
+      'Tiempos',
+      'Implementación de procesos',
+      'Negociación operadores comex',
+    ],
+    reversed: true,
+  },
+  {
+    role: 'Analista',
+    roleSuffix: 'de importaciones',
+    name: 'Danitza Vega',
+    image: '/figma/instructors/danitza.jpg',
+    points: [
+      'Manejo de importaciones aéreas y marítimas',
+      'China',
+      'Usa',
+      'Tiempos',
+      'Permisos',
+      'Documentación',
+    ],
+  },
+];
+---
+
+<section class="instructors">
+  <div class="instructors-wrap">
+    <p class="instructors-kicker">INSTRUCTORES</p>
+    <h2>¿Quien te enseña?<br />Equipo <span>Pro Business</span></h2>
+
+    <div class="instructors-list">
+      {instructors.map((item) => (
+        <article class:list={['instructor-card', item.reversed && 'is-reversed']}>
+          <div class="instructor-text">
+            <h3>
+              <span>{item.role}</span> {item.roleSuffix}
+            </h3>
+            <ul>
+              {item.points.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          </div>
+          <figure class="instructor-photo">
+            <img src={item.image} alt={item.name} />
+            <figcaption>{item.name}</figcaption>
+          </figure>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .instructors {
+    background: #000;
+    padding: 78px 0 72px;
+    color: #fff;
+  }
+
+  .instructors-wrap {
+    width: min(100%, 1180px);
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .instructors-kicker {
+    margin: 0 0 16px;
+    font-family: 'Sora', Inter, Arial, sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+
+  .instructors h2 {
+    margin: 0;
+    font-size: clamp(56px, 5.2vw, 88px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    font-weight: 300;
+  }
+
+  .instructors h2 span {
+    color: #32dd80;
+    font-weight: 500;
+  }
+
+  .instructors-list {
+    margin-top: 38px;
+    display: grid;
+    gap: 28px;
+  }
+
+  .instructor-card {
+    border: 2px solid #a1ffcc;
+    border-radius: 28px;
+    background: radial-gradient(120% 180% at 10% 0%, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 35%), #0b0b0d;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    overflow: hidden;
+    min-height: 420px;
+    align-items: center;
+  }
+
+  .instructor-card.is-reversed {
+    grid-template-columns: 1fr 1.1fr;
+  }
+
+  .instructor-card.is-reversed .instructor-photo {
+    order: -1;
+  }
+
+  .instructor-text {
+    padding: 38px 34px 34px;
+  }
+
+  .instructor-text h3 {
+    margin: 0;
+    font-size: clamp(44px, 3.6vw, 64px);
+    line-height: 0.92;
+    font-family: 'Sora', Inter, Arial, sans-serif;
+    font-weight: 600;
+  }
+
+  .instructor-text h3 span {
+    color: #00a24a;
+  }
+
+  .instructor-text ul {
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'Sora', Inter, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.12;
+  }
+
+  .instructor-text li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 2px;
+  }
+
+  .instructor-text li::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    margin-top: 8px;
+    transform: rotate(45deg);
+    background: #32fc88;
+    flex-shrink: 0;
+  }
+
+  .instructor-photo {
+    margin: 14px;
+    height: 500px;
+    border-radius: 21px;
+    overflow: hidden;
+    position: relative;
+    background: #101010;
+  }
+
+  .instructor-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
+  }
+
+  .instructor-photo::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 38%;
+    background: linear-gradient(180deg, rgba(50, 221, 128, 0) 14%, #32dd80 100%);
+  }
+
+  .instructor-photo figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 14px;
+    z-index: 1;
+    text-align: center;
+    color: #000;
+    font-family: 'Sora', Inter, Arial, sans-serif;
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 600;
+  }
+
+  @media (max-width: 980px) {
+    .instructors {
+      padding: 44px 0;
+    }
+
+    .instructors-kicker {
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .instructors h2 {
+      font-size: clamp(44px, 12vw, 60px);
+    }
+
+    .instructors-list {
+      margin-top: 20px;
+      gap: 14px;
+    }
+
+    .instructor-card,
+    .instructor-card.is-reversed {
+      grid-template-columns: 1fr;
+      border-radius: 16px;
+      min-height: auto;
+    }
+
+    .instructor-text {
+      padding: 20px 14px 18px;
+    }
+
+    .instructor-text h3 {
+      font-size: clamp(32px, 8.8vw, 44px);
+    }
+
+    .instructor-text ul {
+      font-size: 16px;
+      margin-top: 14px;
+    }
+
+    .instructor-photo {
+      order: -1;
+      margin: 10px;
+      min-height: 190px;
+      height: 190px;
+      border-radius: 12px;
+    }
+
+    .instructor-photo figcaption {
+      font-size: 26px;
+      bottom: 10px;
+    }
+  }
+</style>

@@ -1,0 +1,67 @@
+<header class="success-head">
+  <p class="success-kicker">CASOS DE ÉXITOS</p>
+  <h2 class="success-title">Alumnos que ya<br />están <span>importando</span></h2>
+  <p class="success-desc">
+    Resultados reales de personas que pasaron por el curso y aplicaron lo aprendido.
+  </p>
+  <img src="/figma/success/glow.png" alt="" class="success-glow" aria-hidden="true" />
+</header>
+
+<style>
+  .success-head {
+    position: relative;
+    max-width: 520px;
+    z-index: 1;
+  }
+
+  .success-kicker {
+    margin: 0 0 10px;
+    color: #32dd80;
+    font-family: 'Sora', Inter, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .success-title {
+    margin: 0;
+    color: #111;
+    font-family: 'Epilogue', Inter, Arial, sans-serif;
+    font-size: clamp(44px, 5.5vw, 64px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+  }
+
+  .success-title span {
+    color: #16d279;
+    font-weight: 400;
+  }
+
+  .success-desc {
+    margin: 18px 0 0;
+    max-width: 430px;
+    color: #1a1a1a;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .success-glow {
+    position: absolute;
+    right: -290px;
+    top: 14px;
+    width: 260px;
+    height: auto;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.85;
+  }
+
+  @media (max-width: 980px) {
+    .success-kicker { font-size: 14px; margin-bottom: 8px; }
+    .success-title { font-size: clamp(36px, 10.3vw, 48px); }
+    .success-desc { font-size: 16px; line-height: 1.25; margin-top: 10px; max-width: 280px; }
+    .success-glow { right: -90px; top: 24px; width: 190px; opacity: 0.7; }
+  }
+</style>
