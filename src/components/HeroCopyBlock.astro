@@ -36,6 +36,12 @@
         <span class="hero-btn-bottom-text-2">de clases en vivo</span>
       </div>
     </div>
+    <a class="hero-register-cta" href="#registro">
+      <span>REGISTRARSE AHORA</span>
+      <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.2709 24.5417C19.0392 24.5417 24.5417 19.0392 24.5417 12.2709C24.5417 5.50256 19.0392 3.33365e-06 12.2709 2.74195e-06C5.5026 2.15024e-06 3.98114e-05 5.50256 3.92197e-05 12.2709C3.8628e-05 19.0391 5.5026 24.5417 12.2709 24.5417ZM8.77044 11.3538L12.6454 7.47881C12.8903 7.23871 13.2196 7.10421 13.5625 7.10421C13.9055 7.10421 14.2348 7.23871 14.4796 7.47881C14.7217 7.72266 14.8575 8.05229 14.8575 8.39586C14.8575 8.73942 14.7217 9.06906 14.4796 9.3129L11.5088 12.2709L14.4796 15.2288C14.6001 15.3492 14.6956 15.4922 14.7608 15.6496C14.8259 15.8069 14.8595 15.9756 14.8595 16.1459C14.8595 16.3162 14.8259 16.4849 14.7607 16.6422C14.6956 16.7996 14.6 16.9425 14.4796 17.063C14.3591 17.1834 14.2162 17.2789 14.0588 17.3441C13.9015 17.4093 13.7328 17.4428 13.5625 17.4428C13.3922 17.4428 13.2235 17.4092 13.0662 17.3441C12.9088 17.2789 12.7659 17.1833 12.6454 17.0629L8.77044 13.1879C8.52841 12.9441 8.39258 12.6144 8.39258 12.2709C8.39258 11.9273 8.52841 11.5977 8.77044 11.3538Z" fill="black"/>
+        </svg>
+            </a>
   </div>
   <picture class="hero-person-image">
     <!-- Solo existe `hero-person-dekstop.png` en `public/figma`, usamos el mismo asset en ambos breakpoints -->
@@ -54,7 +60,7 @@
 
 <style>
   .hero-copy {
-    padding: 10em 0 2em 0;
+    padding: 10em 0 0em 0;
     display: flex;
     flex-direction: row;
   }
@@ -124,6 +130,33 @@
     font-size: 16px;
     align-self: flex-end;
   }
+  .hero-register-cta {
+    margin-top: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #1de970 0%, #11c962 100%);
+    color: #001607;
+    font-family: "Sora", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    padding: 8px 10px 8px 20px;
+  }
+  .hero-register-cta-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #032010;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    line-height: 1;
+  }
   .hero-person-image {
     width: 60%;
     display: flex;
@@ -139,7 +172,7 @@
   }
 
   .hero-person-image img {
-    width: min(740px, 55vw);
+    width: min(650px, 55vw);
     height: auto;
     display: block;
     /*recorta 200 px bottom verticalmente */
@@ -193,6 +226,9 @@
     }
     .hero-desc {
       font-size: 30px;
+    }
+    .hero-register-cta {
+      font-size: 24px;
     }
   }
 </style>
