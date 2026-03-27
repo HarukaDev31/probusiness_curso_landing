@@ -349,4 +349,21 @@ import CourseOverviewSection from "../components/CourseOverviewSection.astro";
       gap: 34px;
     }
   }
+
+  @media (max-width: 980px) {
+    .hero-page {
+      overflow-x: hidden;
+    }
+
+    .success-wrap {
+      width: 100%;
+      max-width: 100%;
+      padding-inline: clamp(12px, 4vw, 20px);
+      box-sizing: border-box;
+    }
+
+    .limited-wrap {
+      padding-inline: clamp(12px, 4vw, 18px);
+    }
+  }
 </style>

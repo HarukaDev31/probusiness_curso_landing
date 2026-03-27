@@ -363,19 +363,33 @@
   }
   @media (max-width: 980px) {
     .wa-doubt {
-      padding: 34px 14px 36px;
+      padding: clamp(2.5rem, 10vw, 4rem) clamp(12px, 4vw, 18px)
+        clamp(2rem, 8vw, 3rem);
+    }
+    .wa-inner {
+      width: 100%;
+      max-width: 100%;
+      padding-inline: clamp(4px, 2vw, 12px);
+      box-sizing: border-box;
+    }
+    .wa-inner h2 {
+      font-size: clamp(32px, 8vw, 46px);
     }
     .wa-inner p {
       margin-top: 10px;
       font-size: 15px;
-      max-width: 280px;
+      max-width: min(100%, 320px);
     }
     .wa-btn {
+      width: 100%;
+      max-width: min(100%, 400px);
+      min-width: 0;
       min-height: 54px;
       margin-top: 16px;
       border-radius: 12px;
       gap: 10px;
       font-size: 18px;
+      box-sizing: border-box;
     }
     .wa-btn img {
       width: 22px;
@@ -388,6 +402,21 @@
       width: 88px;
       right: 14px;
       bottom: 18px;
+    }
+    .wa-doubt-section-icon-truck {
+      width: min(88px, 24vw);
+      right: max(8px, env(safe-area-inset-right, 0px));
+      bottom: 12px;
+    }
+    .wa-doubt-section-icon-chat {
+      width: min(88px, 24vw);
+      left: max(8px, env(safe-area-inset-left, 0px));
+      top: 28%;
+    }
+    .wa-doubt-section-icon-ubi {
+      width: min(88px, 24vw);
+      right: max(8px, env(safe-area-inset-right, 0px));
+      top: 16px;
     }
   }
 </style>

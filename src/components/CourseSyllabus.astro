@@ -461,4 +461,17 @@ const cards = [
   .syllabus-card-desc-line {
     line-height: 1.25;
   }
+
+  @media (max-width: 980px) {
+    .syllabus {
+      --syllabus-font-scale: 1;
+      padding: 40px 0 52px;
+    }
+    .syllabus-wrap {
+      width: 100%;
+      max-width: 100%;
+      padding-inline: clamp(12px, 4vw, 20px);
+      box-sizing: border-box;
+    }
+  }
 </style>

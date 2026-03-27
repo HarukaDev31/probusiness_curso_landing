@@ -118,4 +118,24 @@
     text-align: right;
     font-size: 12px;
   }
+
+  @media (max-width: 980px) {
+    .price-panel {
+      height: auto;
+      min-height: 0;
+      width: 100%;
+      max-width: 100%;
+      padding: clamp(1.25rem, 5vw, 2rem);
+      box-sizing: border-box;
+    }
+    .price-arrow {
+      right: 1rem;
+      top: 1rem;
+      width: 48px;
+      height: 48px;
+    }
+    .price-panel-content-2 {
+      width: 100%;
+    }
+  }
 </style>

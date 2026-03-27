@@ -73,6 +73,19 @@
     height: 34px;
   }
 
+  @media (max-width: 980px) {
+    .course-overview {
+      padding-inline: clamp(12px, 4vw, 20px);
+      box-sizing: border-box;
+    }
+    .course-video-card {
+      height: auto;
+      aspect-ratio: 16 / 9;
+      min-height: 200px;
+      max-height: min(56vh, 480px);
+    }
+  }
+
   @media (max-width: 679px) {
     .course-overview {
       padding: 72px 0 96px;
