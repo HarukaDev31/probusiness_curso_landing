@@ -344,7 +344,6 @@ import CourseOverviewSection from "../components/CourseOverviewSection.astro";
       padding: 42px 0 84px;
     }
     .limited-wrap {
-      padding: 0 18px;
       grid-template-columns: 0.9fr 1.1fr;
       gap: 34px;
     }
@@ -355,6 +354,12 @@ import CourseOverviewSection from "../components/CourseOverviewSection.astro";
       overflow-x: hidden;
     }
 
+    .right-glow {
+      right: auto;
+      left: 0;
+      transform: scaleX(-1);
+    }
+
     .success-wrap {
       width: 100%;
       max-width: 100%;
@@ -363,7 +368,9 @@ import CourseOverviewSection from "../components/CourseOverviewSection.astro";
     }
 
     .limited-wrap {
-      padding-inline: clamp(12px, 4vw, 18px);
+      padding-inline: clamp(16px, 5vw, 28px);
+      max-width: 100%;
+      box-sizing: border-box;
     }
   }
 </style>

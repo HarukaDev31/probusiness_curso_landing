@@ -109,7 +109,14 @@ function breakAfterSecondWord(text) {
     padding: 0 16px;
     line-height: 2;
   }
-
+@media (max-width: 980px) {
+  .instructors {
+    padding: 44px 0;
+  }
+  .instructors-wrap {
+    padding: 0;
+  }
+}
   .instructors-kicker {
     margin: 0 0 16px;
     font-family: 'Sora', Inter, Arial, sans-serif;
@@ -249,12 +256,15 @@ background-clip: text;
     }
 
     .instructors-kicker {
-      font-size: 13px;
-      margin-bottom: 8px;
+      font-size: clamp(16px, 4.2vw, 20px);
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
     }
 
     .instructors h2 {
-      font-size: clamp(44px, 12vw, 60px);
+      font-size: clamp(26px, 7.2vw, 38px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
     }
 
     .instructors-list {
@@ -267,10 +277,15 @@ background-clip: text;
       grid-template-columns: 1fr;
       border-radius: 16px;
       min-height: auto;
+      padding: 4px;
+      box-sizing: border-box;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .instructor-text {
-      padding: 20px 14px 18px;
+      padding: 26px 20px 24px;
     }
 
     .instructor-text h3 {
@@ -281,18 +296,28 @@ background-clip: text;
     .instructor-text ul {
       font-size: 16px;
       margin-top: 14px;
+      padding: 0;
+      margin-left: 0;
     }
 
     .instructor-photo {
       order: -1;
-      margin: 10px;
-      min-height: 190px;
-      height: 190px;
-      border-radius: 12px;
+      margin: 14px 14px 0;
+      width: calc(100% - 28px);
+      height: auto;
+      min-height: 340px;
+      max-height: 500px;
+      aspect-ratio: 4 / 3;
+      border-radius: 14px;
+    }
+
+    .instructor-photo img {
+      object-fit: cover;
+      object-position: center 20%;
     }
 
     .instructor-photo figcaption {
-      font-size: 26px;
+      font-size: 24px;
       bottom: 10px;
     }
   }

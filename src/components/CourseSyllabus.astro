@@ -117,7 +117,8 @@ const cards = [
 
 <section class="syllabus">
   <div class="syllabus-wrap">
-    <div class="syllabus-figma" aria-label="Temario del curso">
+    <!-- Desktop: canvas posicionado tipo Figma -->
+    <div class="syllabus-figma syllabus-figma--desktop" aria-label="Temario del curso">
       <p class="syllabus-kicker" style={header.kicker}>temario</p>
 
       <p class="syllabus-hero" style={header.hero}>
@@ -126,11 +127,12 @@ const cards = [
       </p>
 
       <p class="syllabus-subtitle" style={header.subtitle}>
-        <span class="syllabus-subtitle-strong">
+        <span class="syllabus-subtitle-lead">
           Un programa completo para que domines{" "}
         </span>
-        <span class="syllabus-subtitle-regular">
-          cada etapa del negocio de importación desde cero.
+        <strong class="syllabus-subtitle-em">cada etapa</strong>
+        <span class="syllabus-subtitle-tail">
+          {" "}del negocio de importación desde cero.
         </span>
       </p>
 
@@ -178,6 +180,62 @@ const cards = [
           </>
         ))
       }
+    </div>
+
+    <!-- Mobile: apilado, zig-zag, mismos datos -->
+    <div class="syllabus-mobile" aria-label="Temario del curso">
+      <p class="syllabus-m-kicker">Temario</p>
+      <h2 class="syllabus-m-hero">
+        <span class="syllabus-m-hero-line">Lo que vas a </span>
+        <span class="syllabus-m-hero-accent">aprender</span>
+      </h2>
+      <p class="syllabus-m-lead">
+        <span>Un programa completo para que domines </span>
+        <strong class="syllabus-m-lead-em">cada etapa</strong>
+        <span> del negocio de importación desde cero.</span>
+      </p>
+      <div class="syllabus-m-list">
+        {
+          cards.map((c) => (
+            <article
+              class:list={[
+                "syllabus-m-card",
+                `syllabus-m-card--${c.id}`,
+                c.id % 2 === 1
+                  ? "syllabus-m-card--odd"
+                  : "syllabus-m-card--even",
+              ]}
+            >
+              <span
+                class:list={["syllabus-m-num", `syllabus-m-num--${c.id}`]}
+                aria-hidden="true"
+              >
+                {c.id}
+              </span>
+              <div class="syllabus-m-card-inner">
+                {"titleTwoLines" in c ? (
+                  <div class="syllabus-m-title syllabus-m-title--multi">
+                    {c.titleLines.map((line) => (
+                      <p class="syllabus-m-title-line">{line}</p>
+                    ))}
+                  </div>
+                ) : (
+                  <h3 class="syllabus-m-title">{c.titleText}</h3>
+                )}
+                {"descTwoLines" in c ? (
+                  <div class="syllabus-m-desc syllabus-m-desc--multi">
+                    {c.descLines.map((line) => (
+                      <p class="syllabus-m-desc-line">{line}</p>
+                    ))}
+                  </div>
+                ) : (
+                  <p class="syllabus-m-desc">{c.descText}</p>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
@@ -253,18 +311,16 @@ const cards = [
     display: block;
   }
 
-  .syllabus-subtitle-strong,
-  .syllabus-subtitle-regular {
+  .syllabus-subtitle-lead,
+  .syllabus-subtitle-tail {
     display: inline;
     line-height: 1.26;
-  }
-
-  .syllabus-subtitle-strong {
     font-weight: 300;
   }
 
-  .syllabus-subtitle-regular {
-    font-weight: 400;
+  .syllabus-subtitle-em {
+    font-weight: 600;
+    line-height: 1.26;
   }
 
   .syllabus-card-bg {
@@ -274,57 +330,65 @@ const cards = [
     z-index: 0;
   }
 
-  /* Hooks por tarjeta (BG) */
-  .syllabus-card-bg--1 {
+  /* Hooks por tarjeta (BG): mismo degradado en desktop (.syllabus-card-bg) y móvil (.syllabus-m-card) */
+  .syllabus-card-bg--1,
+  .syllabus-m-card.syllabus-m-card--1 {
     background: radial-gradient(
       220% 100% at 0% 0%,
       #32dd80 0%,
       rgba(0, 86, 39, 0) 100%
     );
   }
-  .syllabus-card-bg--2 {
+  .syllabus-card-bg--2,
+  .syllabus-m-card.syllabus-m-card--2 {
     background: radial-gradient(
       100.45% 100.45% at 100% 100%,
       #32dd80 0%,
       rgba(0, 86, 39, 0) 120%
     );
   }
-  .syllabus-card-bg--3 {
+  .syllabus-card-bg--3,
+  .syllabus-m-card.syllabus-m-card--3 {
     background: radial-gradient(
       100.45% 100.45% at 100% 100%,
       #32dd80 0%,
       rgba(0, 86, 39, 0) 120%
     );
   }
-  .syllabus-card-bg--4 {
+  .syllabus-card-bg--4,
+  .syllabus-m-card.syllabus-m-card--4 {
     background: radial-gradient(
       170% 100% at 100% 10%,
       #32dd80 0%,
       rgba(0, 86, 39, 0) 100%
     );
   }
-  .syllabus-card-bg--5 {
+  .syllabus-card-bg--5,
+  .syllabus-m-card.syllabus-m-card--5 {
     background: radial-gradient(
       100.45% 100.45% at 0% 100%,
       #32dd80 0%,
       rgba(0, 86, 39, 0) 120%
     );
   }
-  .syllabus-card-bg--6 {
+  .syllabus-card-bg--6,
+  .syllabus-m-card.syllabus-m-card--6 {
     background: radial-gradient(
       220% 100% at 0% 0%,
       #32dd80 0%,
       rgba(0, 86, 39, 0) 100%
     );
   }
-  .syllabus-card-bg--7 {
+  .syllabus-card-bg--7,
+  .syllabus-m-card.syllabus-m-card--7 {
     background: radial-gradient(
       100.45% 100.45% at 100% 100%,
       #32dd80 0%,
       rgba(0, 86, 39, 0) 120%
     );
   }
-  .syllabus-card-bg--8 {
+  .syllabus-card-bg--8,
+  .syllabus-m-card.syllabus-m-card--8 {
     background: radial-gradient(
       90% 100.45% at 100% 0%,
       #32dd80 0%,
@@ -340,19 +404,20 @@ const cards = [
     font-size: calc(250px * var(--syllabus-font-scale));
     line-height: 1.26;
     color: rgba(50, 221, 128, 0.16);
-    overflow: hidden;
     z-index: 2;
     pointer-events: none;
   }
 
-  /* Hooks por tarjeta (Número) */
-  .syllabus-card-number--1 {
+  /* Hooks por tarjeta (Número): mismo clip en desktop y móvil */
+  .syllabus-card-number--1,
+  .syllabus-m-num--1 {
     background: linear-gradient(213deg, #00da80 54.52%, #111 76.83%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .syllabus-card-number--2 {
+  .syllabus-card-number--2,
+  .syllabus-m-num--2 {
     background: linear-gradient(
       195deg,
       #000 43.35%,
@@ -362,7 +427,8 @@ const cards = [
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .syllabus-card-number--3 {
+  .syllabus-card-number--3,
+  .syllabus-m-num--3 {
     background: linear-gradient(
       303deg,
       #00da80 59.68%,
@@ -372,7 +438,8 @@ const cards = [
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .syllabus-card-number--4 {
+  .syllabus-card-number--4,
+  .syllabus-m-num--4 {
     background: linear-gradient(
       195deg,
       #000 43.35%,
@@ -382,7 +449,8 @@ const cards = [
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .syllabus-card-number--5 {
+  .syllabus-card-number--5,
+  .syllabus-m-num--5 {
     background: linear-gradient(
       94deg,
       #00da80 6.51%,
@@ -392,13 +460,15 @@ const cards = [
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .syllabus-card-number--6 {
+  .syllabus-card-number--6,
+  .syllabus-m-num--6 {
     background: linear-gradient(190deg, #000 47.79%, #32dd80 106.91%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .syllabus-card-number--7 {
+  .syllabus-card-number--7,
+  .syllabus-m-num--7 {
     background: linear-gradient(
       30deg,
       #00da80 37.02%,
@@ -408,7 +478,8 @@ const cards = [
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .syllabus-card-number--8 {
+  .syllabus-card-number--8,
+  .syllabus-m-num--8 {
     background: linear-gradient(82deg, #000 14.45%, #32dd80 86.55%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -462,16 +533,178 @@ const cards = [
     line-height: 1.25;
   }
 
+  .syllabus-mobile {
+    display: none;
+  }
+
   @media (max-width: 980px) {
+    .syllabus-figma--desktop {
+      display: none;
+    }
+
+    .syllabus-mobile {
+      display: block;
+    }
+
     .syllabus {
       --syllabus-font-scale: 1;
       padding: 40px 0 52px;
+      background: #000;
     }
+
     .syllabus-wrap {
       width: 100%;
       max-width: 100%;
       padding-inline: clamp(12px, 4vw, 20px);
       box-sizing: border-box;
+    }
+
+    .syllabus-m-kicker {
+      margin: 0 0 10px;
+      font-family: "Sora", sans-serif;
+      font-weight: 400;
+      font-size: calc(20px * var(--syllabus-font-scale));
+      letter-spacing: 0;
+      text-transform: uppercase;
+      line-height: 1.26;
+      color: #32dd80;
+    }
+
+    .syllabus-m-hero {
+      margin: 0 0 16px;
+      font-family: "Epilogue", sans-serif;
+      font-weight: 300;
+      font-size: clamp(28px, 8vw, 64px);
+      line-height: 0.85;
+      letter-spacing: calc(-3.84px * var(--syllabus-font-scale));
+      color: #fff;
+    }
+
+    .syllabus-m-hero-line {
+      color: #fff;
+      font-weight: 300;
+      line-height: 0.85;
+    }
+
+    .syllabus-m-hero-accent {
+      font-weight: 300;
+      line-height: 0.85;
+      color: transparent;
+      background: linear-gradient(180deg, #25cf43 0%, #61fd7d 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .syllabus-m-lead {
+      margin: 0 0 28px;
+      font-family: "Epilogue", sans-serif;
+      font-weight: 300;
+      font-size: calc(20px * var(--syllabus-font-scale));
+      line-height: 1.26;
+      color: #fff;
+      max-width: 36ch;
+    }
+
+    .syllabus-m-lead-em {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .syllabus-m-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .syllabus-m-card {
+      position: relative;
+      width: min(85%, 100%);
+      min-height: 200px;
+      box-sizing: border-box;
+      border-radius: 16px;
+      padding: 20px 22px 20px 18px;
+      overflow: visible;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .syllabus-m-card--odd {
+      align-self: flex-end;
+      margin-left: auto;
+    }
+
+    .syllabus-m-card--even {
+      align-self: flex-start;
+      margin-right: auto;
+    }
+
+    .syllabus-m-num {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: "Epilogue", sans-serif;
+      font-weight: 600;
+      font-size: clamp(100px, 30vw, 150px);
+      line-height: 0.85;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+
+    .syllabus-m-card-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 72%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: center;
+      min-height: 100%;
+    }
+
+    .syllabus-m-title {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-weight: 600;
+      font-size: calc(20px * var(--syllabus-font-scale));
+      line-height: 1.26;
+      color: #fff;
+    }
+
+    .syllabus-m-title--multi {
+      margin: 0;
+    }
+
+    .syllabus-m-title-line {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-weight: 600;
+      font-size: calc(20px * var(--syllabus-font-scale));
+      line-height: 1.26;
+      color: #fff;
+    }
+
+    .syllabus-m-desc {
+      margin: 0;
+      font-family: "Epilogue", sans-serif;
+      font-weight: 400;
+      font-size: calc(14px * var(--syllabus-font-scale));
+      line-height: 1.25;
+      color: #fff;
+    }
+
+    .syllabus-m-desc--multi {
+      margin: 0;
+    }
+
+    .syllabus-m-desc-line {
+      margin: 0;
+      font-family: "Epilogue", sans-serif;
+      font-weight: 400;
+      font-size: calc(14px * var(--syllabus-font-scale));
+      line-height: 1.25;
     }
   }
 </style>

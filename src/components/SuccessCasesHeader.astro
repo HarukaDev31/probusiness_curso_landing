@@ -109,9 +109,19 @@ const assets = {
       padding-inline: clamp(0px, 1vw, 8px);
       box-sizing: border-box;
     }
-    .success-kicker { font-size: 20px; margin-bottom: 8px; }
-    .success-title { font-size: 46px; letter-spacing: -2.6px; }
-    .success-desc { font-size: 16px; line-height: 1.25; margin-top: 10px; max-width: min(100%, 280px); }
+    .success-kicker {
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .success-title {
+      font-size: clamp(28px, 8.5vw, 40px);
+      letter-spacing: -0.05em;
+      line-height: 1.05;
+    }
+    .success-desc {
+      display: none;
+    }
 
     .success-glow-blob--large { right: -240px; top: 0; width: 760px; opacity: 0.75; }
     .success-glow-blob--small { right: -60px; top: 210px; width: 420px; opacity: 0.75; }

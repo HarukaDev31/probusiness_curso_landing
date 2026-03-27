@@ -46,9 +46,9 @@ const cards = [
     {cards.map((_, i) => (
       <button
         type="button"
-        class:list={['success-dot', { active: i === 0 }]}
+        class:list={['success-dot', { active: i === 1 }]}
         role="tab"
-        aria-selected={i === 0}
+        aria-selected={i === 1}
         aria-controls="success-carousel-track"
         data-success-dot={i}
       >
@@ -119,12 +119,27 @@ const cards = [
       });
     }
 
-    /** @param {number} i */
-    function scrollToSlide(i) {
+    /**
+     * @param {number} i
+     * @param {{ behavior?: ScrollBehavior }} [opts]
+     */
+    function scrollToSlide(i, opts = {}) {
       const list = slides();
       const el = list[i];
       if (!(el instanceof HTMLElement)) return;
-      trackEl.scrollTo({ left: el.offsetLeft, behavior: "smooth" });
+      const centerSnap = window.matchMedia("(max-width: 980px)").matches;
+      let left = el.offsetLeft;
+      if (centerSnap) {
+        left =
+          el.offsetLeft -
+          trackEl.clientWidth / 2 +
+          el.offsetWidth / 2;
+      }
+      const behavior = opts.behavior ?? "smooth";
+      trackEl.scrollTo({
+        left: Math.max(0, left),
+        behavior,
+      });
     }
 
     /** @param {number} i */
@@ -133,6 +148,27 @@ const cards = [
       if (i < 0 || i >= list.length) return;
       setDots(i);
       scrollToSlide(i);
+    }
+
+    /** En móvil el 2.º slide queda centrado por defecto (índice 1). */
+    function applyInitialPosition() {
+      const list = slides();
+      if (list.length < 2) {
+        sync();
+        return;
+      }
+      const isMobile = window.matchMedia("(max-width: 980px)").matches;
+      if (isMobile) {
+        setDots(1);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            scrollToSlide(1, { behavior: "auto" });
+            updatePartialVisibility();
+          });
+        });
+      } else {
+        sync();
+      }
     }
 
     let ticking = false;
@@ -219,7 +255,7 @@ const cards = [
       true
     );
 
-    sync();
+    applyInitialPosition();
   })();
 </script>
 
@@ -406,15 +442,55 @@ const cards = [
   }
 
   @media (max-width: 980px) {
-    /* Card más angosta que el viewport; asoma el siguiente slide. */
-    .success-slide {
-      flex: 0 0 clamp(200px, 68vw, 280px);
-      width: clamp(200px, 68vw, 280px);
-      min-width: clamp(200px, 68vw, 280px);
+    /*
+      1 carta centrada + ~½ + ~½ a los lados:
+      2*w + 2*gap ≈ ancho útil → w = (100vw - insets - 2*gap) / 2
+    */
+    .success-carousel {
+      --carousel-inset: clamp(12px, 4vw, 20px);
+      --gap: 10px;
+      --slide-w: calc(
+        (100vw - 2 * var(--carousel-inset) - 2 * var(--gap)) / 2
+      );
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+      max-width: 100%;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 0;
+      scroll-padding-right: 0;
+      padding: 8px calc(50vw - var(--slide-w) / 2) 12px;
+      box-sizing: border-box;
     }
+
+    .success-slide {
+      flex: 0 0 var(--slide-w);
+      width: var(--slide-w);
+      min-width: var(--slide-w);
+      scroll-snap-align: center;
+    }
+
     .success-play { width: 58px; height: 58px; }
-    .success-cap strong { width: 170px; font-size: 13px; }
-    .success-cap small { font-size: 9px; }
+
+    .success-cap {
+      margin-top: 8px;
+      gap: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .success-cap strong {
+      width: min(100%, 240px);
+      font-size: clamp(14px, 4vw, 17px);
+      line-height: 1.2;
+    }
+
+    .success-cap small {
+      font-size: clamp(10px, 2.8vw, 12px);
+      margin-top: 2px;
+      letter-spacing: 0.04em;
+    }
     .success-dot { width: 10px; height: 10px; }
   }
 
