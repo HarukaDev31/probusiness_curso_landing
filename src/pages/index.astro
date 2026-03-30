@@ -35,6 +35,88 @@ import CourseOverviewSection from "../components/CourseOverviewSection.astro";
     <SupportBenefitsGrid />
 
     <section class="success-section">
+      <svg
+        width="576"
+        height="1186"
+        viewBox="0 0 576 1186"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="right-glow"
+      >
+        <mask
+          id="mask0_2020_668"
+          style="mask-type:alpha"
+          maskUnits="userSpaceOnUse"
+          x="142"
+          y="150"
+          width="953"
+          height="885"
+        >
+          <ellipse
+            cx="618.5"
+            cy="592.518"
+            rx="484.266"
+            ry="433.014"
+            transform="rotate(-156.006 618.5 592.518)"
+            fill="url(#paint0_linear_2020_668)"></ellipse>
+        </mask>
+        <g mask="url(#mask0_2020_668)">
+          <g filter="url(#filter0_f_2020_668)">
+            <ellipse
+              cx="380.087"
+              cy="370.095"
+              rx="380.087"
+              ry="370.095"
+              transform="matrix(-0.512211 -0.85886 0.908986 -0.416827 362.253 978.319)"
+              fill="url(#paint1_linear_2020_668)"></ellipse>
+          </g>
+        </g>
+        <defs>
+          <filter
+            id="filter0_f_2020_668"
+            x="-4.76804"
+            y="16.4704"
+            width="1017.5"
+            height="962.283"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+          >
+            <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="BackgroundImageFix"
+              result="shape"></feBlend>
+            <feGaussianBlur
+              stdDeviation="60"
+              result="effect1_foregroundBlur_2020_668"></feGaussianBlur>
+          </filter>
+          <linearGradient
+            id="paint0_linear_2020_668"
+            x1="645.509"
+            y1="268.778"
+            x2="606.797"
+            y2="1045.41"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stop-color="#F585FF"></stop>
+            <stop offset="0.40625" stop-color="#EF88CC" stop-opacity="0.59375"
+            ></stop>
+            <stop offset="1" stop-color="#D9D9D9" stop-opacity="0"></stop>
+          </linearGradient>
+          <linearGradient
+            id="paint1_linear_2020_668"
+            x1="401.286"
+            y1="93.3966"
+            x2="365.272"
+            y2="756.878"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stop-color="#32DD80"></stop>
+            <stop offset="1" stop-color="#32DD80" stop-opacity="0"></stop>
+          </linearGradient>
+        </defs>
+      </svg>
       <div class="success-wrap">
         <SuccessCasesHeader />
         <SuccessCasesCarousel />
@@ -166,9 +248,23 @@ import CourseOverviewSection from "../components/CourseOverviewSection.astro";
     height: 34px;
   }
   .success-section {
+    position: relative;
     background: #fff;
-    padding: 42px 0 50px;
+    padding: 80px 0 50px;
     overflow: hidden;
+  }
+  .right-glow {
+    position: absolute;
+    right: 0;
+    top: 10em;
+    width: 30%;
+    height: 50%;
+    background: linear-gradient(
+      183deg,
+      #32dd80 14.44%,
+      rgba(50, 221, 128, 0) 99.6%
+    );
+    filter: blur(60px);
   }
   .success-wrap {
     width: 80%;
@@ -248,9 +344,33 @@ import CourseOverviewSection from "../components/CourseOverviewSection.astro";
       padding: 42px 0 84px;
     }
     .limited-wrap {
-      padding: 0 18px;
       grid-template-columns: 0.9fr 1.1fr;
       gap: 34px;
+    }
+  }
+
+  @media (max-width: 980px) {
+    .hero-page {
+      overflow-x: hidden;
+    }
+
+    .right-glow {
+      right: auto;
+      left: 0;
+      transform: scaleX(-1);
+    }
+
+    .success-wrap {
+      width: 100%;
+      max-width: 100%;
+      padding-inline: clamp(12px, 4vw, 20px);
+      box-sizing: border-box;
+    }
+
+    .limited-wrap {
+      padding-inline: clamp(16px, 5vw, 28px);
+      max-width: 100%;
+      box-sizing: border-box;
     }
   }
 </style>

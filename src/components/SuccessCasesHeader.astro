@@ -16,7 +16,8 @@ const assets = {
   <p class="success-desc">
     Resultados reales de personas que pasaron por el curso y aplicaron lo aprendido.
   </p>
-
+  
+    
 </header>
 
 <style>
@@ -25,7 +26,14 @@ const assets = {
     max-width: 520px;
     z-index: 1;
   }
-
+  .right-glow {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 576px;
+    height: 1186px;
+    z-index: -1;
+  }
   .success-kicker {
     margin: 0 0 10px;
     color: #32dd80;
@@ -96,9 +104,24 @@ const assets = {
   }
 
   @media (max-width: 980px) {
-    .success-kicker { font-size: 20px; margin-bottom: 8px; }
-    .success-title { font-size: 46px; letter-spacing: -2.6px; }
-    .success-desc { font-size: 16px; line-height: 1.25; margin-top: 10px; max-width: 280px; }
+    .success-head {
+      max-width: 100%;
+      padding-inline: clamp(0px, 1vw, 8px);
+      box-sizing: border-box;
+    }
+    .success-kicker {
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .success-title {
+      font-size: clamp(28px, 8.5vw, 40px);
+      letter-spacing: -0.05em;
+      line-height: 1.05;
+    }
+    .success-desc {
+      display: none;
+    }
 
     .success-glow-blob--large { right: -240px; top: 0; width: 760px; opacity: 0.75; }
     .success-glow-blob--small { right: -60px; top: 210px; width: 420px; opacity: 0.75; }
