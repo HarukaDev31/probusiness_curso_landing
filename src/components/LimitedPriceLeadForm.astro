@@ -1,4 +1,9 @@
-<article class="form-panel">
+---
+const apiUrl = import.meta.env.PUBLIC_LANDING_CURSO_API_URL ?? "/api/public/landing-curso/leads";
+const formToken = import.meta.env.PUBLIC_LANDING_CURSO_FORM_TOKEN ?? "";
+---
+
+<article class="form-panel" id="registro">
   <img
     class="hourglass"
     src="/figma/pricing/hourglass.png"
@@ -6,19 +11,40 @@
     aria-hidden="true"
   />
   <h3>Precio por<br />tiempo<br />limitado</h3>
-  <form class="lead-form">
-    <label>Nombre Completo<input placeholder="e.g José Gutiérrez" /></label>
-    <label>Número de WhatsApp<input placeholder="999 999 999" /></label>
+  <form
+    class="lead-form"
+    id="landing-curso-form"
+    data-api-url={apiUrl}
+    data-form-token={formToken}
+  >
     <label
-      >Correo electrónico<input placeholder="jgutierrezl@example.com" /></label
+      >Nombre Completo<input name="nombre" placeholder="e.g José Gutiérrez" required /></label
+    >
+    <label
+      >Número de WhatsApp<input name="whatsapp" placeholder="999 999 999" required /></label
+    >
+    <label
+      >Correo electrónico<input
+        name="email"
+        type="email"
+        placeholder="jgutierrezl@example.com"
+        required
+      /></label
     >
     <label
       >¿Tienes experiencia importando?
-      <select><option>Selecciona una opción</option></select>
+      <select name="experiencia_importando" required>
+        <option value="" selected disabled>Selecciona una opción</option>
+        <option value="si">Si</option>
+        <option value="no">No</option>
+        <option value="poca">Poca</option>
+      </select>
     </label>
-    <button type="button">Inscribirme por S/ 380</button>
+    <button type="submit">Inscribirme por S/ 380</button>
   </form>
-  <p class="form-foot">Un asesor te contactará para confirmar tu inscripción</p>
+  <p class="form-foot" id="landing-curso-form-feedback">
+    Un asesor te contactará para confirmar tu inscripción
+  </p>
 </article>
 <style>
   .form-panel {
@@ -75,6 +101,11 @@
     font-size: 20px;
     font-weight: 600;
     font-family: 'Epilogue', sans-serif;
+    cursor: pointer;
+  }
+  .lead-form button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
   }
   .form-foot {
     margin: 12px 0 0;
@@ -101,3 +132,63 @@
     }
   }
 </style>
+
+<script>
+  const form = document.getElementById("landing-curso-form");
+  const feedback = document.getElementById("landing-curso-form-feedback");
+
+  if (form instanceof HTMLFormElement && feedback) {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (!(submitButton instanceof HTMLButtonElement)) return;
+
+      const apiUrl = form.dataset.apiUrl;
+      const formToken = form.dataset.formToken;
+
+      if (!apiUrl) {
+        feedback.textContent =
+          "El formulario no esta configurado. Contacta al administrador.";
+        return;
+      }
+
+      const formData = new FormData(form);
+      const payload = {
+        nombre: String(formData.get("nombre") ?? "").trim(),
+        whatsapp: String(formData.get("whatsapp") ?? "").trim(),
+        email: String(formData.get("email") ?? "").trim(),
+        experiencia_importando: String(formData.get("experiencia_importando") ?? "").trim(),
+      };
+
+      submitButton.disabled = true;
+      feedback.textContent = "Enviando...";
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(formToken ? { Authorization: `Bearer ${formToken}` } : {}),
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          feedback.textContent =
+            "No se pudo enviar tu registro. Intentalo nuevamente en unos minutos.";
+          return;
+        }
+
+        sessionStorage.setItem("leadFormConfirmed", "1");
+        sessionStorage.setItem("leadFormConfirmedAt", String(Date.now()));
+        window.location.href = "/gracias";
+      } catch (error) {
+        feedback.textContent =
+          "No se pudo enviar tu registro. Verifica tu conexion e intenta de nuevo.";
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  }
+</script>

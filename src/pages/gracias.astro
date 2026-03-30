@@ -1,0 +1,242 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <script is:inline>
+    (function () {
+      const SUCCESS_FLAG_KEY = "leadFormConfirmed";
+      const SUCCESS_AT_KEY = "leadFormConfirmedAt";
+      const ACCESS_TTL_MS = 10 * 60 * 1000;
+      const hasConfirmed = sessionStorage.getItem(SUCCESS_FLAG_KEY) === "1";
+      const confirmedAt = Number(sessionStorage.getItem(SUCCESS_AT_KEY) || "0");
+      const isFresh =
+        Number.isFinite(confirmedAt) &&
+        Date.now() - confirmedAt <= ACCESS_TTL_MS;
+
+      if (!hasConfirmed || !isFresh) {
+        window.location.replace("/");
+        return;
+      }
+
+      document.documentElement.classList.add("thanks-authorized");
+      sessionStorage.removeItem(SUCCESS_FLAG_KEY);
+    })();
+  </script>
+
+  <main class="thanks-page">
+    <section class="thanks-card-wrap">
+      <article class="thanks-card">
+        <img
+          class="thanks-logo"
+          src="/figma/logo-probusiness.png"
+          alt="Pro Business"
+        />
+
+        <div class="thanks-content">
+          <img
+            class="thanks-icon"
+            src="/figma/thanks/thanks-envelope-green.png"
+            alt="Mensaje recibido"
+            width="260"
+            height="260"
+          />
+          <div class="thanks-copy">
+            <h1>Gracias por <span>registrarte</span></h1>
+            <p>
+              Nos alegra mucho que hayas dado este paso para seguir creciendo en
+              el mundo de la importación y la logística. En unos instantes
+              recibirás un correo con todos los detalles para que puedas acceder
+              a tu curso y comenzar de inmediato.
+            </p>
+            <a class="thanks-home-btn" href="/">Volver al Inicio</a>
+          </div>
+        </div>
+      </article>
+      <p class="thanks-footer">
+        © 2026 Pro Business - Curso de Importacion desde China
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .thanks-page {
+    display: none;
+    min-height: 100svh;
+    background: #000;
+    color: #fff;
+    place-items: center;
+    padding: 0;
+  }
+
+  :global(html.thanks-authorized) .thanks-page {
+    display: grid;
+  }
+
+  .thanks-card-wrap {
+    width: 100%;
+  }
+
+  .thanks-card {
+    background: #050505;
+    padding: clamp(18px, 3vw, 34px) clamp(16px, 4vw, 40px);
+    min-height: 100svh;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .thanks-logo {
+    display: block;
+    width: 150px;
+    height: auto;
+    margin: 4px 0 clamp(24px, 5vw, 56px);
+  }
+
+  .thanks-content {
+    width: min(1050px, 96%);
+    margin: 0 auto;
+    background: linear-gradient(125deg, #111f17 0%, #12261b 58%, #102117 100%);
+    border-radius: 28px;
+    display: grid;
+    grid-template-columns: minmax(180px, 260px) 1fr;
+    gap: clamp(20px, 5vw, 54px);
+    align-items: center;
+    padding: clamp(24px, 5vw, 52px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .thanks-content::after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    right: -88px;
+    top: -88px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(50, 221, 128, 0.55) 0%,
+      rgba(50, 221, 128, 0) 70%
+    );
+    pointer-events: none;
+  }
+
+  .thanks-icon {
+    justify-self: center;
+    width: clamp(150px, 23vw, 250px);
+    height: auto;
+    display: block;
+  }
+
+  .thanks-copy h1 {
+    margin: 0 0 14px;
+    font-family: "Sora", sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+
+  .thanks-copy h1 span {
+    color: #32dd80;
+  }
+
+  .thanks-copy p {
+    margin: 0 0 24px;
+    max-width: 36ch;
+    font-family: "Epilogue", sans-serif;
+    color: #e6e6e6;
+    font-size: clamp(1rem, 2vw, 1.6rem);
+    line-height: 1.2;
+  }
+
+  .thanks-home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 10px;
+    border: none;
+    text-decoration: none;
+    background: linear-gradient(90deg, #25cf43 0%, #61fd7d 100%);
+    color: #001607;
+    font-family: "Epilogue", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    transition:
+      transform 0.2s ease,
+      filter 0.2s ease;
+  }
+
+  .thanks-home-btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+  }
+
+  .thanks-home-btn:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
+  .thanks-footer {
+    text-align: center;
+    margin: 18px 0 0;
+    color: #9a9a9a;
+    font-family: "Epilogue", sans-serif;
+    font-size: 0.9rem;
+  }
+  .floating-register-btn {
+    position: fixed;
+    right: 14px;
+    bottom: 18px;
+    width: 86px;
+    border-radius: 12px;
+    background: rgba(8, 8, 8, 0.95);
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 8px 10px;
+    z-index: 90;
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.42);
+  }
+  .floating-register-btn-text {
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.02;
+    font-family: "Epilogue", sans-serif;
+    font-weight: 500;
+    text-transform: lowercase;
+  }
+  .floating-register-btn-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    background: radial-gradient(
+      circle at 30% 25%,
+      #3df7a2 0%,
+      #0edb76 56%,
+      #09bc64 100%
+    );
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 26px rgba(14, 219, 118, 0.5);
+  }
+
+  @media (max-width: 840px) {
+    .thanks-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .thanks-copy p {
+      margin-inline: auto;
+    }
+  }
+</style>

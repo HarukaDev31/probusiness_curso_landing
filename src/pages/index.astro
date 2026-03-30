@@ -134,6 +134,15 @@ import CourseOverviewSection from "../components/CourseOverviewSection.astro";
     <WhatsappDoubtSection />
     <FooterWave />
   </main>
+  <a href="#registro" class="floating-register-btn" aria-label="Ir al formulario de registro">
+    <span class="floating-register-btn-text">Registrarse<br />ahora</span>
+    <span class="floating-register-btn-icon" aria-hidden="true">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.67672e-05 13C2.67672e-05 5.82029 5.82032 0 13 0C20.1798 0 26 5.82029 26 13C26 20.1796 20.1798 26 13 26C11.0973 26 9.28727 25.5904 7.65578 24.8538C7.52766 24.7959 7.38473 24.7784 7.24703 24.8066L1.56137 25.9735C1.13331 26.0612 0.689768 25.9282 0.380784 25.6192C0.0717999 25.3102 -0.0612812 24.8667 0.0265599 24.4386L1.19337 18.753C1.22164 18.6152 1.20401 18.4724 1.14616 18.3442C0.409592 16.7127 2.67672e-05 14.9027 2.67672e-05 13ZM7.15 11.05C6.07304 11.05 5.2 11.923 5.2 13V13.013C5.2 14.0899 6.07304 14.963 7.15 14.963H7.163C8.23996 14.963 9.113 14.0899 9.113 13.013V13C9.113 11.923 8.23996 11.05 7.163 11.05H7.15ZM13 11.05C11.9231 11.05 11.05 11.923 11.05 13V13.013C11.05 14.0899 11.9231 14.963 13 14.963H13.013C14.0899 14.963 14.963 14.0899 14.963 13.013V13C14.963 11.923 14.0899 11.05 13.013 11.05H13ZM16.9 13C16.9 11.923 17.7731 11.05 18.85 11.05H18.863C19.9399 11.05 20.813 11.923 20.813 13V13.013C20.813 14.0899 19.9399 14.963 18.863 14.963H18.85C17.7731 14.963 16.9 14.0899 16.9 13.013V13Z" fill="white"/>
+        </svg>
+        
+    </span>
+  </a>
 </Layout>
 
 <style>
@@ -286,6 +295,44 @@ import CourseOverviewSection from "../components/CourseOverviewSection.astro";
     grid-template-columns: 1fr;
     gap: 22px;
   }
+  .floating-register-btn {
+    position: fixed;
+    right: 14px;
+    bottom: 18px;
+    width: 86px;
+    border-radius: 12px;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 8px 10px;
+    z-index: 70;
+    
+  }
+  .floating-register-btn-text {
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.02;
+    font-family: "Epilogue", sans-serif;
+    font-weight: 500;
+   
+  }
+  .floating-register-btn-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 25%, #3df7a2 0%, #0edb76 56%, #09bc64 100%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 26px rgba(14, 219, 118, 0.5);
+  }
+  .floating-register-btn-icon svg {
+    width: 36px;
+    height: 36px;
+  }
   @media (min-width: 981px) {
     .offer-bar {
       padding: 14px 24px;
@@ -346,6 +393,18 @@ import CourseOverviewSection from "../components/CourseOverviewSection.astro";
     .limited-wrap {
       grid-template-columns: 0.9fr 1.1fr;
       gap: 34px;
+    }
+    .floating-register-btn {
+      right: 20px;
+      bottom: 24px;
+      width: 98px;
+    }
+    .floating-register-btn-text {
+      font-size: 20px;
+    }
+    .floating-register-btn-icon {
+      width: 62px;
+      height: 62px;
     }
   }
 
