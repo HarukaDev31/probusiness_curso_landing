@@ -4,17 +4,105 @@
     <h2 class="course-title">¿De qué trata <span>el curso?</span></h2>
   </div>
   <article class="course-video-card">
-    <button
-      type="button"
-      class="course-play"
-      aria-label="Reproducir video del curso"
+    <video
+      class="course-video-element"
+      playsinline
+      webkit-playsinline
+      preload="metadata"
+      controls
+      aria-label="Video del curso"
+      width="1920"
+      height="1080"
     >
-      <span class="course-play-circle"
-        ><img src="/figma/play.png" alt="" /></span
+      <source src="/videos/landing-curso-overview.mp4" type="video/mp4" />
+    </video>
+    <div class="course-video-shade" aria-hidden="true"></div>
+    <div class="course-video-preview" data-course-video-preview>
+      <button
+        type="button"
+        class="course-play"
+        aria-label="Reproducir video del curso"
+        data-course-video-play
       >
-    </button>
+        <span class="course-play-circle"
+          ><img src="/figma/play.png" alt="" /></span
+        >
+      </button>
+    </div>
   </article>
 </section>
+
+<script>
+  const card = document.querySelector(".course-video-card");
+  if (card instanceof HTMLElement) {
+    const video = card.querySelector(".course-video-element");
+    const preview = card.querySelector("[data-course-video-preview]");
+    const playBtn = card.querySelector("[data-course-video-play]");
+
+    if (
+      video instanceof HTMLVideoElement &&
+      preview instanceof HTMLElement &&
+      playBtn instanceof HTMLButtonElement
+    ) {
+      const reveal = () => {
+        preview.hidden = true;
+        card.classList.add("course-video-card--playing");
+      };
+
+      const showPreview = () => {
+        preview.hidden = false;
+        card.classList.remove("course-video-card--playing");
+      };
+
+      const playWithSound = () => {
+        video.muted = false;
+        video.defaultMuted = false;
+        return video.play();
+      };
+
+      const tryAutoplay = () => {
+        if (!video.paused) return;
+        const p = playWithSound();
+        if (p === undefined) return;
+        p.then(() => reveal()).catch(() => {
+          video.muted = true;
+          video.defaultMuted = true;
+          const p2 = video.play();
+          if (p2 === undefined) return;
+          p2.then(() => reveal()).catch(() => showPreview());
+        });
+      };
+
+      playBtn.addEventListener("click", () => {
+        reveal();
+        const p = playWithSound();
+        if (p !== undefined) p.catch(() => showPreview());
+      });
+
+      preview.addEventListener("click", (event) => {
+        if (
+          event.target instanceof Element &&
+          event.target.closest("[data-course-video-play]")
+        ) {
+          return;
+        }
+        reveal();
+        const p = playWithSound();
+        if (p !== undefined) p.catch(() => showPreview());
+      });
+
+      video.addEventListener("ended", () => showPreview());
+      video.addEventListener("pause", () => {
+        if (video.currentTime > 0 && !video.ended) return;
+        showPreview();
+      });
+      video.addEventListener("play", () => reveal());
+
+      queueMicrotask(() => tryAutoplay());
+      video.addEventListener("canplay", () => tryAutoplay(), { once: true });
+    }
+  }
+</script>
 
 <style>
   .course-overview {
@@ -48,21 +136,54 @@
     color: #32dd80;
   }
   .course-video-card {
-    width: min(100%, 1180px);
+    width: 90%;
     margin: 0 auto;
     border-radius: 18px;
     background: #0f0f0f;
     min-height: 220px;
     height: 70vh;
     position: relative;
+    overflow: hidden;
   }
-  .course-play {
+  .course-video-element {
     position: absolute;
     inset: 0;
-    border: 0;
-    background: transparent;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .course-video-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.1) 55%,
+      rgba(0, 0, 0, 0.35) 100%
+    );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .course-video-card--playing .course-video-shade {
+    opacity: 1;
+  }
+  .course-video-preview {
+    position: absolute;
+    inset: 0;
     display: grid;
     place-items: center;
+    background: #000;
+  }
+  .course-video-preview[hidden] {
+    display: none;
+  }
+  .course-play {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
   }
   .course-play-circle {
     width: 90px;
@@ -101,7 +222,7 @@
       flex-direction: column;
     }
     .course-video-card {
-      width: 80%;
+      width: 90%;
       height: auto;
       aspect-ratio: 16 / 9;
       min-height: 200px;
@@ -128,7 +249,7 @@
       width: 280px;
     }
     .course-video-card {
-      width: 80%;
+      width: 90%;
       border-radius: 24px;
       min-height: 180px;
     }

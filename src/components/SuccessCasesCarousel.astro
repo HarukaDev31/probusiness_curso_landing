@@ -1,11 +1,17 @@
 ---
+function tikTokVideoId(href: string): string {
+  const m = href.match(/\/video\/(\d+)/);
+  return m?.[1] ?? "";
+}
+
 const cards = [
-  { title: 'JHONNY — RACKS PARA TV', tag: 'CASO DE ÉXITO' },
-  { title: 'CLIENTE TESTIMONIO', tag: 'CASO DE ÉXITO' },
-  { title: 'CLIENTE TESTIMONIO', tag: 'CASO DE ÉXITO' },
-  { title: 'JHONNY — RACKS PARA TV', tag: 'CASO DE ÉXITO' },
-  { title: 'CLIENTE TESTIMONIO', tag: 'CASO DE ÉXITO' },
-  { title: 'CLIENTE TESTIMONIO', tag: 'CASO DE ÉXITO' },
+  { href: "https://www.tiktok.com/@pro_business_impo/video/7573862255759002892", tag: "CASO DE ÉXITO" },
+  { href: "https://www.tiktok.com/@pro_business_impo/video/7589488343231073592", tag: "CASO DE ÉXITO" },
+  { href: "https://www.tiktok.com/@pro_business_impo/video/7558631582156754187", tag: "CASO DE ÉXITO" },
+  { href: "https://www.tiktok.com/@pro_business_impo/video/7621708070598626561", tag: "CASO DE ÉXITO" },
+  { href: "https://www.tiktok.com/@pro_business_impo/video/7599820210345889045", tag: "CASO DE ÉXITO" },
+  { href: "https://www.tiktok.com/@pro_business_impo/video/7567580877408996629", tag: "CASO DE ÉXITO" },
+  { href: "https://www.tiktok.com/@pro_business_impo/video/7545278265087331592", tag: "CASO DE ÉXITO" },
 ];
 ---
 
@@ -18,19 +24,46 @@ const cards = [
     aria-label="Casos de éxito"
   >
     {cards.map((c, i) => (
-      <article class="success-slide" data-success-slide data-success-slide-index={i}>
-        <button
-          class="success-card"
-          type="button"
-          aria-label={`Reproducir testimonio: ${c.title}`}
-        >
-          <span class="success-play" aria-hidden="true">
-            <img src="/figma/play-long.svg" alt="" />
-          </span>
-        </button>
+      <article
+        class="success-slide"
+        data-success-slide
+        data-success-slide-index={i}
+        data-tiktok-id={tikTokVideoId(c.href)}
+        data-tiktok-url={c.href}
+      >
+        <div class="success-card">
+          <div class="success-poster">
+            <img class="success-poster-img" alt="" loading="lazy" decoding="async" />
+            <span class="success-play" aria-hidden="true">
+              <img src="/figma/play-long.svg" alt="" />
+            </span>
+            <button
+              type="button"
+              class="success-activate"
+              aria-label={`Reproducir caso de éxito ${i + 1}`}
+            ></button>
+          </div>
+          <div class="success-embed" hidden aria-hidden="true">
+            <button
+              type="button"
+              class="success-collapse"
+              aria-label="Cerrar video y volver a la vista previa"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M18 6L6 18M6 6l12 12"></path>
+              </svg>
+            </button>
+            <iframe
+              class="success-tiktok-iframe"
+              title={`TikTok — caso de éxito ${i + 1}`}
+              allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
 
         <div class="success-cap">
-          <strong>{c.title}</strong>
+          <strong>CLIENTE TESTIMONIO</strong>
           <small>{c.tag}</small>
         </div>
       </article>
@@ -46,9 +79,9 @@ const cards = [
     {cards.map((_, i) => (
       <button
         type="button"
-        class:list={['success-dot', { active: i === 1 }]}
+        class:list={['success-dot', { active: i === 0 }]}
         role="tab"
-        aria-selected={i === 1}
+        aria-selected={i === 0}
         aria-controls="success-carousel-track"
         data-success-dot={i}
       >
@@ -67,6 +100,137 @@ const cards = [
 
     const slides = () => Array.from(trackEl.querySelectorAll("[data-success-slide]"));
     const dots = () => Array.from(dotsWrapEl.querySelectorAll("[data-success-dot]"));
+
+    async function resolveTikTokThumbnailUrl(videoUrl) {
+      try {
+        const r = await fetch(`https://noembed.com/embed?url=${encodeURIComponent(videoUrl)}`);
+        if (r.ok) {
+          const d = await r.json();
+          if (typeof d?.thumbnail_url === "string" && d.thumbnail_url.length > 0) {
+            return d.thumbnail_url;
+          }
+        }
+      } catch {}
+      try {
+        const r2 = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(videoUrl)}`);
+        if (r2.ok) {
+          const d2 = await r2.json();
+          if (typeof d2?.data?.image?.url === "string" && d2.data.image.url.length > 0) {
+            return d2.data.image.url;
+          }
+        }
+      } catch {}
+      return null;
+    }
+
+    function loadPosterThumbnails() {
+      slides().forEach((slide) => {
+        if (!(slide instanceof HTMLElement)) return;
+        const url = slide.getAttribute("data-tiktok-url");
+        const img = slide.querySelector(".success-poster-img");
+        if (!url || !(img instanceof HTMLImageElement)) return;
+        void (async () => {
+          const thumb = await resolveTikTokThumbnailUrl(url);
+          if (!thumb) return;
+          img.onload = () => img.classList.add("success-poster-img--ready");
+          img.src = thumb;
+        })();
+      });
+    }
+
+    function tikTokPlayerUrl(videoId, autoplay = true) {
+      const q = new URLSearchParams({
+        music_info: "0",
+        description: "0",
+        rel: "0",
+        autoplay: autoplay ? "1" : "0",
+        playsinline: "1",
+        muted: "0",
+      });
+      return `https://www.tiktok.com/player/v1/${videoId}?${q.toString()}`;
+    }
+
+    function postToTiktokPlayer(iframe, type) {
+      if (!(iframe instanceof HTMLIFrameElement) || !iframe.contentWindow) return;
+      try {
+        iframe.contentWindow.postMessage({ type, "x-tiktok-player": true }, "*");
+      } catch {}
+    }
+
+    function kickTiktokPlayback(iframe) {
+      postToTiktokPlayer(iframe, "play");
+      postToTiktokPlayer(iframe, "unMute");
+    }
+
+    function deactivateTiktokSlide(slide) {
+      if (!(slide instanceof HTMLElement)) return;
+      slide.classList.remove("success-slide--playing");
+      const wrap = slide.querySelector(".success-embed");
+      const iframe = slide.querySelector(".success-tiktok-iframe");
+      if (wrap instanceof HTMLElement) {
+        wrap.hidden = true;
+        wrap.setAttribute("aria-hidden", "true");
+      }
+      if (iframe instanceof HTMLIFrameElement) {
+        iframe.src = "about:blank";
+      }
+    }
+
+    function activateTiktokSlide(slide) {
+      if (!(slide instanceof HTMLElement)) return;
+      const id = slide.getAttribute("data-tiktok-id");
+      const wrap = slide.querySelector(".success-embed");
+      const iframe = slide.querySelector(".success-tiktok-iframe");
+      if (!id || !(wrap instanceof HTMLElement) || !(iframe instanceof HTMLIFrameElement)) return;
+
+      slides().forEach((s) => {
+        if (s !== slide && s instanceof HTMLElement && s.classList.contains("success-slide--playing")) {
+          deactivateTiktokSlide(s);
+        }
+      });
+
+      slide.classList.add("success-slide--playing");
+      wrap.hidden = false;
+      wrap.setAttribute("aria-hidden", "false");
+      iframe.src = tikTokPlayerUrl(id, true);
+      iframe.addEventListener("load", () => kickTiktokPlayback(iframe), { once: true });
+      [100, 260, 700, 1400].forEach((ms) => {
+        window.setTimeout(() => kickTiktokPlayback(iframe), ms);
+      });
+    }
+
+    function preloadTikTokPlayerIframes() {
+      slides().forEach((slide) => {
+        if (!(slide instanceof HTMLElement)) return;
+        const id = slide.getAttribute("data-tiktok-id");
+        const iframe = slide.querySelector(".success-tiktok-iframe");
+        if (!id || !(iframe instanceof HTMLIFrameElement)) return;
+        if (iframe.getAttribute("src")) return;
+        iframe.src = tikTokPlayerUrl(id, false);
+      });
+    }
+
+    trackEl.addEventListener("click", (e) => {
+      const tgt = e.target instanceof Element ? e.target : null;
+      if (!tgt) return;
+      const collapse = tgt.closest(".success-collapse");
+      if (collapse) {
+        const slide = collapse.closest("[data-success-slide]");
+        if (slide && trackEl.contains(slide)) deactivateTiktokSlide(slide);
+        return;
+      }
+      const activate = tgt.closest(".success-activate");
+      if (!activate) return;
+      const slide = activate.closest("[data-success-slide]");
+      if (slide && trackEl.contains(slide)) activateTiktokSlide(slide);
+    });
+
+    loadPosterThumbnails();
+    if (typeof requestIdleCallback !== "undefined") {
+      requestIdleCallback(() => preloadTikTokPlayerIframes(), { timeout: 3000 });
+    } else {
+      setTimeout(preloadTikTokPlayerIframes, 700);
+    }
 
     function activeIndex() {
       const trackRect = trackEl.getBoundingClientRect();
@@ -150,7 +314,7 @@ const cards = [
       scrollToSlide(i);
     }
 
-    /** En móvil el 2.º slide queda centrado por defecto (índice 1). */
+    /** En móvil el carrusel inicia desde el primer slide (índice 0). */
     function applyInitialPosition() {
       const list = slides();
       if (list.length < 2) {
@@ -159,10 +323,10 @@ const cards = [
       }
       const isMobile = window.matchMedia("(max-width: 980px)").matches;
       if (isMobile) {
-        setDots(1);
+        setDots(0);
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            scrollToSlide(1, { behavior: "auto" });
+            scrollToSlide(0, { behavior: "auto" });
             updatePartialVisibility();
           });
         });
@@ -348,6 +512,73 @@ const cards = [
     filter: none;
     opacity: 1;
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .success-poster,
+  .success-embed {
+    position: absolute;
+    inset: 0;
+  }
+
+  .success-poster {
+    background: #111;
+    position: relative;
+  }
+
+  .success-poster-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .success-poster-img--ready {
+    opacity: 1;
+  }
+
+  .success-activate {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .success-embed {
+    background: #000;
+    z-index: 2;
+  }
+
+  .success-embed[hidden] {
+    display: none;
+  }
+
+  .success-tiktok-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    background: #000;
+  }
+
+  .success-collapse {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    cursor: pointer;
   }
 
   /* Solo difuminado cuando el slide no se ve completo en la pista. */
@@ -358,15 +589,27 @@ const cards = [
   }
 
   .success-play {
-    width: 72px;
-    height: 72px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 74px;
+    height: 74px;
+    border-radius: 999px;
     display: grid;
     place-items: center;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    z-index: 2;
+    pointer-events: none;
   }
 
   .success-play img {
-    width: 100%;
-    height: 100%;
+    width: 42px;
+    height: 42px;
     object-fit: contain;
     display: block;
   }
@@ -459,7 +702,7 @@ const cards = [
       scroll-snap-type: x mandatory;
       scroll-padding-left: 0;
       scroll-padding-right: 0;
-      padding: 8px calc(50vw - var(--slide-w) / 2) 12px;
+      padding: 8px 0 12px;
       box-sizing: border-box;
     }
 
