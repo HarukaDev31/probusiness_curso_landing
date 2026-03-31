@@ -1,3 +1,11 @@
+---
+interface Props {
+  videoSrc?: string;
+}
+
+const { videoSrc = "/videos/landing-curso-overview.mp4" } = Astro.props;
+---
+
 <section class="course-overview">
   <div class="course-overview-header">
     <p class="course-kicker">CONOCE EL CURSO</p>
@@ -14,7 +22,7 @@
       width="1920"
       height="1080"
     >
-      <source src="/videos/landing-curso-overview.mp4" type="video/mp4" />
+      <source src={videoSrc} type="video/mp4" />
     </video>
     <div class="course-video-shade" aria-hidden="true"></div>
     <div class="course-video-preview" data-course-video-preview>
