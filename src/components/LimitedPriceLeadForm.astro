@@ -1,6 +1,15 @@
 ---
 const apiUrl = import.meta.env.PUBLIC_LANDING_CURSO_API_URL ?? "/api/public/landing-curso/leads";
 const formToken = import.meta.env.PUBLIC_LANDING_CURSO_FORM_TOKEN ?? "";
+
+interface Props {
+  /** Código de campaña (ej. mar2026), coincide con la ruta /{codigo}/ */
+  campaignCode: string;
+  /** Ruta de gracias para esta campaña, ej. /mar2026/gracias */
+  graciasPath: string;
+}
+
+const { campaignCode, graciasPath } = Astro.props;
 ---
 
 <article class="form-panel" id="registro">
@@ -133,7 +142,12 @@ const formToken = import.meta.env.PUBLIC_LANDING_CURSO_FORM_TOKEN ?? "";
   }
 </style>
 
-<script>
+<script
+  define:vars={{
+    campaignCode,
+    graciasPath,
+  }}
+>
   const form = document.getElementById("landing-curso-form");
   const feedback = document.getElementById("landing-curso-form-feedback");
 
@@ -159,6 +173,7 @@ const formToken = import.meta.env.PUBLIC_LANDING_CURSO_FORM_TOKEN ?? "";
         whatsapp: String(formData.get("whatsapp") ?? "").trim(),
         email: String(formData.get("email") ?? "").trim(),
         experiencia_importando: String(formData.get("experiencia_importando") ?? "").trim(),
+        codigo_campana: campaignCode,
       };
 
       submitButton.disabled = true;
@@ -182,7 +197,7 @@ const formToken = import.meta.env.PUBLIC_LANDING_CURSO_FORM_TOKEN ?? "";
 
         sessionStorage.setItem("leadFormConfirmed", "1");
         sessionStorage.setItem("leadFormConfirmedAt", String(Date.now()));
-        window.location.href = "/gracias";
+        window.location.href = graciasPath;
       } catch (error) {
         feedback.textContent =
           "No se pudo enviar tu registro. Verifica tu conexion e intenta de nuevo.";

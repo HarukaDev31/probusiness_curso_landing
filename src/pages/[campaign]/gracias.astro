@@ -1,21 +1,32 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import campaignsData from "../../data/campaigns.json";
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return campaignsData.campaigns.map((c) => ({
+    params: { campaign: c.codigo },
+  }));
+}
+
+const { campaign } = Astro.params;
+const base = import.meta.env.BASE_URL;
+const homePath = `${base}${campaign}/`.replace(/([^:]\/)\/+/g, "$1");
 ---
 
 <Layout>
-  <script is:inline>
+  <script define:vars={{ homePath }}>
     (function () {
-      const SUCCESS_FLAG_KEY = "leadFormConfirmed";
-      const SUCCESS_AT_KEY = "leadFormConfirmedAt";
-      const ACCESS_TTL_MS = 10 * 60 * 1000;
-      const hasConfirmed = sessionStorage.getItem(SUCCESS_FLAG_KEY) === "1";
-      const confirmedAt = Number(sessionStorage.getItem(SUCCESS_AT_KEY) || "0");
-      const isFresh =
+      var SUCCESS_FLAG_KEY = "leadFormConfirmed";
+      var SUCCESS_AT_KEY = "leadFormConfirmedAt";
+      var ACCESS_TTL_MS = 10 * 60 * 1000;
+      var hasConfirmed = sessionStorage.getItem(SUCCESS_FLAG_KEY) === "1";
+      var confirmedAt = Number(sessionStorage.getItem(SUCCESS_AT_KEY) || "0");
+      var isFresh =
         Number.isFinite(confirmedAt) &&
         Date.now() - confirmedAt <= ACCESS_TTL_MS;
 
       if (!hasConfirmed || !isFresh) {
-        window.location.replace("/");
+        window.location.replace(homePath);
         return;
       }
 
@@ -49,7 +60,7 @@ import Layout from "../layouts/Layout.astro";
               recibirás un correo con todos los detalles para que puedas acceder
               a tu curso y comenzar de inmediato.
             </p>
-            <a class="thanks-home-btn" href="/">Volver al Inicio</a>
+            <a class="thanks-home-btn" href={homePath}>Volver al Inicio</a>
           </div>
         </div>
       </article>
