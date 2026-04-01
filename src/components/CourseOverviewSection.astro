@@ -106,6 +106,11 @@ const { videoSrc = "/videos/landing-curso-overview.mp4" } = Astro.props;
       });
       video.addEventListener("play", () => reveal());
 
+      window.addEventListener("probusiness:pause-course-overview-video", () => {
+        video.pause();
+        showPreview();
+      });
+
       queueMicrotask(() => tryAutoplay());
       video.addEventListener("canplay", () => tryAutoplay(), { once: true });
     }
