@@ -44,6 +44,67 @@
       />
     </noscript>
     <!-- End Meta Pixel Code -->
+    <!-- TikTok Pixel Code Start -->
+    <script is:inline>
+      !(function (w, d, t) {
+        w.TiktokAnalyticsObject = t;
+        var ttq = (w[t] = w[t] || []);
+        ttq.methods = [
+          "page",
+          "track",
+          "identify",
+          "instances",
+          "debug",
+          "on",
+          "off",
+          "once",
+          "ready",
+          "alias",
+          "group",
+          "enableCookie",
+          "disableCookie",
+          "holdConsent",
+          "revokeConsent",
+          "grantConsent",
+        ];
+        ttq.setAndDefer = function (obj, method) {
+          obj[method] = function () {
+            obj.push([method].concat(Array.prototype.slice.call(arguments, 0)));
+          };
+        };
+        for (var i = 0; i < ttq.methods.length; i++) {
+          ttq.setAndDefer(ttq, ttq.methods[i]);
+        }
+        ttq.instance = function (id) {
+          var inst = ttq._i[id] || [];
+          for (var j = 0; j < ttq.methods.length; j++) {
+            ttq.setAndDefer(inst, ttq.methods[j]);
+          }
+          return inst;
+        };
+        ttq.load = function (id, opts) {
+          var src = "https://analytics.tiktok.com/i18n/pixel/events.js";
+          var partner = opts && opts.partner;
+          ttq._i = ttq._i || {};
+          ttq._i[id] = [];
+          ttq._i[id]._u = src;
+          ttq._t = ttq._t || {};
+          ttq._t[id] = +new Date();
+          ttq._o = ttq._o || {};
+          ttq._o[id] = opts || {};
+          var script = document.createElement("script");
+          script.type = "text/javascript";
+          script.async = true;
+          script.src = src + "?sdkid=" + id + "&lib=" + t;
+          var firstScript = document.getElementsByTagName("script")[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        ttq.load("D79U8EBC77U97CC3140G");
+        ttq.page();
+      })(window, document, "ttq");
+    </script>
+    <!-- TikTok Pixel Code End -->
   </head>
   <body>
     <slot />
