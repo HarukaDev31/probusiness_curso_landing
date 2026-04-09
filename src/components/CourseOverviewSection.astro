@@ -3,7 +3,7 @@ interface Props {
   videoSrc?: string;
 }
 
-const { videoSrc = "/videos/landing-curso-overview.mp4" } = Astro.props;
+const { videoSrc = "https://cdn.probusiness.pe/landingcurso/videos/landing-curso-overview.mp4" } = Astro.props;
 ---
 
 <section class="course-overview">
@@ -33,7 +33,7 @@ const { videoSrc = "/videos/landing-curso-overview.mp4" } = Astro.props;
         data-course-video-play
       >
         <span class="course-play-circle"
-          ><img src="/figma/play.png" alt="" /></span
+          ><img src="https://cdn.probusiness.pe/landingcurso/figma/play.webp" alt="" /></span
         >
       </button>
     </div>
