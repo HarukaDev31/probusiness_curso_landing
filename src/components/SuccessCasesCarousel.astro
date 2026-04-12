@@ -659,24 +659,38 @@ const cards = [
     margin-top: 18px;
     display: flex;
     justify-content: center;
-    gap: 8px;
-    height: 20px;
+    align-items: center;
+    gap: 4px;
+    min-height: 44px;
   }
 
   .success-dot {
-    width: 12px;
-    height: 12px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: 0;
     padding: 0;
-    background: #c7c7c7;
+    background: transparent;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .success-dot::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #c7c7c7;
+    display: block;
     transition:
       transform 0.4s cubic-bezier(0.25, 0.85, 0.35, 1),
       background-color 0.35s ease;
   }
 
-  .success-dot.active {
+  .success-dot.active::before {
     background: #32dd80;
     transform: scale(1.35);
   }
@@ -745,13 +759,16 @@ const cards = [
       margin-top: 2px;
       letter-spacing: 0.04em;
     }
-    .success-dot { width: 10px; height: 10px; }
+    .success-dot::before {
+      width: 10px;
+      height: 10px;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .success-card,
     .success-cap,
-    .success-dot {
+    .success-dot::before {
       transition: none;
     }
 
@@ -760,7 +777,7 @@ const cards = [
       opacity: 0.65;
     }
 
-    .success-dot.active {
+    .success-dot.active::before {
       transform: none;
     }
   }
