@@ -1,3 +1,18 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const DEFAULT_DESCRIPTION =
+  "Curso en vivo Pro Business: aprende a importar desde China, vender en Perú y montar un negocio rentable. Clases, acompañamiento y comunidad.";
+
+const {
+  title = "ProBusiness Curso",
+  description = DEFAULT_DESCRIPTION,
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -5,7 +20,8 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>ProBusiness Curso</title>
+    <meta name="description" content={description} />
+    <title>{title}</title>
     <!-- Meta Pixel Code -->
     <script is:inline>
       !(function (f, b, e, v, n, t, s) {

@@ -1,6 +1,7 @@
 ---
 import campaignsData from "../../data/campaigns.json";
 import Layout from "../../layouts/Layout.astro";
+import { campaignHumanPeriod } from "../../lib/campaignMeta";
 
 export function getStaticPaths() {
   return campaignsData.campaigns.map((c) => ({
@@ -9,11 +10,15 @@ export function getStaticPaths() {
 }
 
 const { campaign } = Astro.params;
+const entry = campaignsData.campaigns.find((c) => c.codigo === campaign)!;
+const period = campaignHumanPeriod(entry.codigo);
 const base = import.meta.env.BASE_URL;
 const homePath = `${base}${campaign}/`.replace(/([^:]\/)\/+/g, "$1");
+const thanksTitle = `Gracias — Pro Business ${period}`;
+const thanksDescription = `Registro al curso Pro Business (${period}): confirma los siguientes pasos y revisa tu correo para no perderte las clases en vivo.`;
 ---
 
-<Layout>
+<Layout title={thanksTitle} description={thanksDescription}>
   <script define:vars={{ homePath }}>
     (function () {
       var SUCCESS_FLAG_KEY = "leadFormConfirmed";

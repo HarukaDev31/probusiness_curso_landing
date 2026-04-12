@@ -13,6 +13,7 @@ import WhatsappDoubtSection from "../../components/WhatsappDoubtSection.astro";
 import FooterWave from "../../components/FooterWave.astro";
 import HeroIntroSection from "../../components/HeroIntroSection.astro";
 import CourseOverviewSection from "../../components/CourseOverviewSection.astro";
+import { campaignHumanPeriod } from "../../lib/campaignMeta";
 
 export function getStaticPaths() {
   return campaignsData.campaigns.map((c) => ({
@@ -25,9 +26,12 @@ const entry = campaignsData.campaigns.find((c) => c.codigo === campaign)!;
 const base = import.meta.env.BASE_URL;
 const graciasPath = `${base}${entry.codigo}/gracias`.replace(/([^:]\/)\/+/g, "$1");
 const videoSrc = entry.ruta;
+const period = campaignHumanPeriod(entry.codigo);
+const pageTitle = `Pro Business Curso — ${period}`;
+const pageDescription = `Curso en vivo Pro Business (${period}). Aprende a importar desde China, vender en Perú y montar un negocio rentable. Clases en vivo, acompañamiento y comunidad.`;
 ---
 
-<Layout>
+<Layout title={pageTitle} description={pageDescription}>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -150,7 +154,7 @@ const videoSrc = entry.ruta;
     <WhatsappDoubtSection />
     <FooterWave />
   </main>
-  <a href="#registro" class="floating-register-btn" aria-label="Ir al formulario de registro">
+  <a href="#registro" class="floating-register-btn" aria-label="Registrarse ahora">
     <span class="floating-register-btn-text">Registrarse<br />ahora</span>
     <span class="floating-register-btn-icon" aria-hidden="true">
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
